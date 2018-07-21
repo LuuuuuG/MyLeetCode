@@ -15,7 +15,7 @@ bool isPalindrome(int x)
 	return (res == x);
 }
 
-int main()
+int main_09()
 {
 	int val = 121;
 	clock_t startTime, endTime;
