@@ -18,13 +18,15 @@ Output: 5
 #include <cstdio>
 int lengthOfLastWord(string s)
 {
-	int pos = 0;
+	int len = 0;
 	for (int i = 0; i < s.size(); ++i)
 	{
-		if (s[i]== ' ')
-			pos = i + 1;
+		if (s[i] != ' ')
+			len++;
+		else if (s[i + 1] && s[i + 1] != ' ')
+			len = 0;
 	}
-	return s.size() - pos;
+	return len;
 }
 
 
@@ -39,12 +41,40 @@ int lengthOfLastWord2(const char* s) {
 	}
 	return len;
 }
+
+int lengthOfLastWord3(string s)
+{
+	int len = 0, endIndx = s.length() - 1;
+	for (int i = endIndx; i >= 0; --i)
+	{
+		if (s[i] == ' ')
+		{
+			if (len > 0) return len;
+		}
+		else
+			++len;
+	}
+	return len;
+}
+void test()
+{
+	char* s = "Hello world";
+	while (*s)
+	{
+		printf("*s++ = %c\n", *s++); //H
+		printf("*s = %c\n", *s);	// e
+		printf("*(s++) = %c\n", *(s++));	//e
+		printf("*s = %c\n", *s);	//l
+	}
+
+}
 int main()
 {
-	string s = "Hi ";
+	string s = "Hello world";
 	int res = lengthOfLastWord(s);
+	//int res = lengthOfLastWord3(s);
 	cout << "res = " << res << endl;
-
+	//test();
 	char *c = "Hello world";
 	int res2 = lengthOfLastWord2(c);
 	cout << "res2 = " << res2 << endl;
