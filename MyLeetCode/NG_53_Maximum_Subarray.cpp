@@ -13,6 +13,7 @@ Output: 6
 Explanation: [4,-1,2,1] has the largest sum = 6.
 
 https://leetcode.com/problems/maximum-subarray/description/
+It's about DP solution: https://blog.csdn.net/u013309870/article/details/75193592
 */
 int maxSubArray(vector<int>& nums) {
 	int ans = nums[0],sum = 0;
