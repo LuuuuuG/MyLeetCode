@@ -68,7 +68,7 @@ void test()
 	}
 
 }
-int main()
+int main_58()
 {
 	string s = "Hello world";
 	int res = lengthOfLastWord(s);
