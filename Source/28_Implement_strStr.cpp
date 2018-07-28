@@ -16,6 +16,8 @@ Output: -1
 
 https://leetcode.com/problems/implement-strstr/description/
 
+C++ Brute-Force and KMP: https://leetcode.com/problems/implement-strstr/discuss/12956/C++-Brute-Force-and-KMP
+
 */
 
 //Brute-Force
