@@ -37,7 +37,7 @@ int strStr(string haystack, string needle) {
 	return -1;
 }
 
-int main()
+int main_028()
 {
 	string s = "Hi world";
 	string p = "";
