@@ -69,7 +69,7 @@ string countAndSay2(int n)
 }
 
 
-int main()
+int main_38()
 {
 	int testNum = 4;
 	string res = countAndSay2(testNum);
