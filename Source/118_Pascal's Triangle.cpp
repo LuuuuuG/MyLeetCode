@@ -34,12 +34,17 @@ vector<vector<int>> generate(int numRows) {
 }
 
 
-int main()
+int main_118()
 {
 
 	
 	vector<vector<int> >res = generate(5);
-
+	for (int i = 0; i < res.size(); ++i)
+	{
+		for (int j = 0; j < res[i].size(); ++j)
+			cout << res[i][j] << ",";
+		cout << endl;
+	}
 	system("pause");
 	return 0;
 }
