@@ -22,24 +22,32 @@ Could you optimize your algorithm to use only O(k) extra space?
 119. Pascal's Triangle II: https://leetcode.com/problems/pascals-triangle-ii/description/
 
 */
-vector<int> getRow(int rowIndex) {
-	vector<int> res, res_1;
-	res.resize(rowIndex);
-	res_1.resize(rowIndex - 1);
 
-	for (int i = 1; (i < res.size() - 1) && rowIndex--; ++i)
+/*
+			 |
+			V
+    <- - -
+	solve order from up to down, from right to left.
+*/
+vector<int> getRow(int rowIndex) {
+	vector<int> res(rowIndex + 1);
+	res[0] = 1;
+	for (int i = 0; i < rowIndex + 1; ++i)
 	{
-		res[0] = res[rowIndex - 1] = 1;
-		res[i]  = res_1[i - 1] + res_1[i];
+		for (int j = i; j > 0; --j)
+		{
+			res[j] += res[j - 1];
+		}
 	}
 	return res;
 }
 
-int mian()
+int main_119()
 {
-	vector<int> v = getRow(3);
+	vector<int> v = getRow(4);
 	for (auto i : v)
 		cout << i << " ";
+	cout << endl;
 
 	system("pause");
 	return 0;
