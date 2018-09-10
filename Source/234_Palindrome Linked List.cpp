@@ -62,7 +62,7 @@ h			                     s
 1 -> 1    null <- 2 <- 1
 		h              s
 */
-
+ListNode* reverseList(ListNode *head);
 bool isPalindrome2(ListNode* head) {
 	ListNode *fast = head, *slow = head;
 	while (fast != NULL && fast->next != NULL)
