@@ -51,10 +51,12 @@ vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
 	return res;
 }
 
+#include <map>
 #include <unordered_map>
 //8ms solutions.
 vector<int> intersect2(vector<int>& nums1, vector<int>& nums2) {
-	unordered_map<int, int> map;
+	//unordered_map<int, int> map;
+	map<int, int> map;
 	for (auto i : nums1)
 		map[i]++;
 	vector<int> res;
@@ -69,7 +71,7 @@ int main_350()
 {
 	vector<int> num1 = { 4,9,5 };
 	vector<int> num2 = { 9, 4, 9, 8, 4 };
-	vector<int> res = intersect(num1, num2);
+	vector<int> res = intersect2(num1, num2);
 	for (auto it : res)
 		cout << it << " ";
 	cout << endl;
