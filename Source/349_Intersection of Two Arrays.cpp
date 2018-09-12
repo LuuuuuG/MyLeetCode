@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <map>
-#include <unordered_map>
+#include <unordered_set>
 using namespace std;
 
 /*
@@ -26,19 +25,19 @@ The result can be in any order.
 
 vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
 	vector<int> res;
-	//map<int, int> map;
-	unordered_map<int, int> map;
-	for (auto i : nums1)
-		map[i]++;
+	unordered_set<int> s(nums1.begin(), nums1.end());
 	for (auto i : nums2)
 	{
-		if (map[i]-- > 0)
+		if (s.count(i))
+		{
 			res.push_back(i);
+			s.erase(i);
+		}
 	}
 	return res;
 }
 
-int main_349()
+int main()
 {
 	vector<int> v1 = { 1, 2, 2, 4 };
 	vector<int> v2 = {  2, 2 };
