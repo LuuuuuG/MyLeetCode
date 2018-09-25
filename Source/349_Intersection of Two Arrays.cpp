@@ -37,7 +37,7 @@ vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
 	return res;
 }
 
-int main()
+int main_349()
 {
 	vector<int> v1 = { 1, 2, 2, 4 };
 	vector<int> v2 = {  2, 2 };
