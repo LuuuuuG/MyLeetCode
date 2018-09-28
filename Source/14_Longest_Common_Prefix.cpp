@@ -28,7 +28,7 @@ string longestCommonPrefix(vector<string>& strs) {
 	if (strs.empty())
 		return "";
 	string res = strs[0];
-	for (int i = 0; i < strs.size(); ++i)
+	for (int i = 1; i < strs.size(); ++i)
 		for (int j = 0; j < res.size(); ++j)
 			if (strs[i][j] != res[j])
 			{
@@ -47,9 +47,25 @@ string longestCommonPrefix2(vector<string>& strs) {
 	return prefix;
 }
 
+// use substr.
+string longestCommonPrefix3(vector<string>& strs) {
+	if(strs.size() < 1)
+		return string();
+	for (int i = 0; i < strs[0].size(); ++i)
+	{
+		for (int j = 1; j < strs.size(); ++j)
+		{
+			if (strs[0][i] != strs[j][i] || i > strs[j].size())
+				return strs[0].substr(0, i);
+		}
+	}
+	return strs[0];
+
+}
+
 int main_14()
 {
-	vector<string> vs = { "Hello", "Hey", "Her" };
+	vector<string> vs = { "Hello", "Hel", "He" };
 	string res = longestCommonPrefix(vs);
 	cout << " longestCommonPrefix is : " << res << endl;
 
