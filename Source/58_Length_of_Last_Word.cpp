@@ -56,6 +56,20 @@ int lengthOfLastWord3(string s)
 	}
 	return len;
 }
+
+int lengthOfLastWord4(string s) {
+	int res = 0;
+	for (int i = s.size() - 1; i >= 0; --i)
+	{
+		if (s[i] == ' '){
+			if (res > 0) break;
+		}
+		else
+			++res;
+	}
+	return res;
+}
+
 void test()
 {
 	char* s = "Hello world";
@@ -68,6 +82,7 @@ void test()
 	}
 
 }
+
 int main_58()
 {
 	string s = "Hello world";
@@ -76,7 +91,7 @@ int main_58()
 	cout << "res = " << res << endl;
 	//test();
 	char *c = "Hello world";
-	int res2 = lengthOfLastWord2(c);
+	int res2 = lengthOfLastWord4(c);
 	cout << "res2 = " << res2 << endl;
 
 	system("pause");
