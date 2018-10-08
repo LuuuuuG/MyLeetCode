@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>坐在马桶上看算法：只有五行的Floyd最短路算法 - 51CTO.COM</title>
+    <meta name="description" content="此算法由Robert W. Floyd（罗伯特·弗洛伊德）于1962年发表在“Communications of the ACM”上。同年Stephen Warshall（史蒂芬·沃舍尔）也独立发表了这个算法。Robert W．Floyd这个牛人是朵奇葩，他原本在芝加哥大学读的文学，但是因为当时美国经济不太景气，找工作比较困难，无奈之下到西屋电气公司当了一名计算机操作员，在IBM650机房值夜班，并由此开始了他的计算机生涯。"/>
+    <meta name="keywords" content="算法,Floyd,最短算法"/>
+    <base target="_blank" />
+    <link rel="stylesheet" type="text/css" href="http://static4.51cto.com/51cto/cms/2016/css/article_head.css?v=0.1"/>
+    <link rel="stylesheet" type="text/css" href="http://static1.51cto.com/51cto/cms/2016/css/article_layout.css?v=2.17"/>
+    <script type="text/javascript" src="http://static1.51cto.com/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://static3.51cto.com//51cto/cms/bdtj/developer.js"></script>
+</head>
+<body >
+<!-- 导航 开始-->
+<!-- top start -->
+<style>
+    .home-top .subweb .sub_widthAuto{width:auto;}
+    .top-nav .nav li .topnavA_zxf{width:194px;left:-60px;}
+    .top-nav .topnavA_zxf a{padding: 0 10px;}
+    .top-nav .nav li:hover .topnavA_zxf a{width:auto;text-indent:inherit;}
+    .zxf_menubot{background:#F4F4F4;padding:15px 20px 0;border-top:4px solid #be0000;font-size:14px;}
+    .zxf_menubot a{padding:0;}
+    .zxf_menubot dl{margin-right:48px;_margin-right:40px;*margin-right:40px;}
+    .zxf_menubot .nmr{margin-right:0;}
+    .zxf_menubot dt,.zxf_menubot dd{float:left;}
+    .zxf_menulist li{float:left;text-align:left;margin-right:20px;}
+    .zxf_menulist a{display:block;margin-bottom:10px;}
+    .zxf_menulist li.nmr{margin-right:0;}
+    .zxf_menu_ico{width:28px;margin-right:20px;text-align:center;color:#666;}
+    .zxf_menu_ico img{display:block;margin:10px auto 10px;}
+    .redNav{color:#be0000;}
+    .subweb-list .navcodebox{ width:410px; left:-225px; padding:20px 15px;}
+    .subweb-list .navcodebox span{ width:136px;display:inline-block; float:left; text-align:center; color:#747474; font-size:13px; }
+    .subweb-list .navcodebox span p{ padding-top: 10px;color:#333;}
+
+    .rmzw_xx li a {
+        float: left;
+        font-size: 16px;
+        height: 23px;
+        line-height: 23px;
+        overflow: hidden;
+        width: 95%;
+    }
+    .rmzw_xx li span.ico {
+        background: rgba(0, 0, 0, 0) url("https://s2.51cto.com/wyfs02/M02/98/D8/wKiom1lBBebwbP2OAAAAuOBywqs269.png") no-repeat scroll left center;
+        float: left;
+        height: 22px;
+        line-height: 22px;
+        width: 15px;
+    }
+
+    .rmzw_xx li {
+        border-bottom: 1px dotted #ccc;
+        float: left;
+        margin-top: 6px;
+        padding: 5px 0;
+        width: 100%;
+    }
+
+    .ctoll1 dd a {
+        color: #343434;
+        float: left;
+        font-family: "Microsoft YaHei";
+        font-size: 14px;
+        padding: 15px 19px 0;
+    }
+</style>
+<div class="home-top" id="topx">
+    <div class="w1001 cent">
+        <div class="pdr10 fl"><a href="http://www.51cto.com/">51CTO首页</a></div>
+        <div class="pdr10 fl">|</div>
+        <div class="pdr10 fl">
+            <div class="subweb"><span class="trans">技术频道</span><i></i>
+                <div class="subweb-list" style="width: 90px; top: 37px;">
+                    <a href="http://ai.51cto.com/" target="_blank">人工智能</a>
+                    <a href="http://cloud.51cto.com/" target="_blank">云计算</a>
+                    <a href="http://bigdata.51cto.com/" target="_blank">大数据</a>
+                    <a href="http://network.51cto.com/" target="_blank">网络</a>
+                    <a href="http://developer.51cto.com/" target="_blank">开发</a>
+                    <a href="http://netsecurity.51cto.com/" target="_blank">安全</a>
+                    <a href="http://os.51cto.com/" target="_blank">系统</a>
+                    <a href="http://mobile.51cto.com/" target="_blank">移动</a>
+                    <a href="http://server.51cto.com/" target="_blank">服务器</a>
+                </div>
+            </div>
+        </div>
+        <div class="pdr10 fl">|</div>
+        <div class="pdr10 fl">
+            <div class="subweb"><span class="trans">51CTO旗下网站</span><i></i>
+                <!--旗下网站-->
+                <div class="subweb-list" style="top: 37px;">
+                    <a href="http://www.51cto.com" target="_blank">51CTO.COM</a>
+                    <a href="http://www.cioage.com" target="_blank">CIOAge.COM</a>
+                    <a href="http://www.hc3i.cn" target="_blank">HC3i.CN</a>
+                    <a href="http://zhijiapro.com/" target="_blank">zhijiapro.com</a>
+                </div>
+                <!--旗下网站-->
+            </div>
+        </div>
+        <div class="pdr10 fl">|</div>
+        <div class="pdr10 fl"><a href="http://www.51cto.com/about/map.htm" target="_blank">地图</a></div>
+        <div class="pdr10 fl">|</div>
+        <div class="pdr10 fl">
+            <div class="subweb"><span class="trans">移动端</span><i></i>
+                <!--旗下网站-->
+                <div class="subweb-list sub_widthAuto" style="top: 37px;">
+                    <div class="navcodebox clearfix" style="width: 546px; display: block;top: 0; border-top: 0; left:-1px;">
+                        <span>
+                             <img src="https://s3.51cto.com/wyfs02/M02/97/8A/wKiom1kvkpKBgQFIAACDBen2-dg668.jpg" width="105" height="107" />
+                             <p>51CTO技术栈</p>
+                        </span>
+                        <span>
+                              <img src="http://s5.51cto.com/wyfs02/M02/8E/33/wKioL1i40HrAObC6AAAcvPVCCV0975.jpg" width="105" height="107" />
+                              <p>51CTO微站服务号</p>
+                        </span>
+                        <span>
+                              <img src="http://s3.51cto.com/wyfs02/M00/8E/33/wKioL1i40HrQZy_TAAAcDOkrRAE327.jpg" width="107" height="107" />
+                              <p>51CTO学院客户端</p>
+                        </span>
+                        <span>
+                              <img src="https://s3.51cto.com/oss/201712/27/48594addc4b5eebf52a15bd51262ab23.jpg" width="107" height="107" />
+                              <p>CIO进化论</p>
+                        </span>
+                    </div>
+                </div>
+                <!--旗下网站-->
+            </div>
+        </div>
+        <div class="top-r">
+            <div id="login_status" style="text-align:right;" class="login"> </div>
+        </div>
+    </div>
+</div>
+<!-- top end -->
+<!-- 导航 结束-->
+
+<!-- 频道导航 -->
+<div class="top_bg">
+	<div class="wrap">
+		<div id="tonglanad" class="left"></div>
+		<div id="list4" class="right" style="position:relative;">
+			<ul>
+				<li id="wordlinkad1"></li>
+				<li id="wordlinkad2"></li>
+				<li id="wordlinkad3"></li>
+				<li id="wordlinkad4"></li>
+			</ul>
+			<div style="right: 0px; width: 24px; height: 14px; z-index: 12; position: absolute; background: transparent url('http://s5.51cto.com/wyfs02/M00/86/BB/wKiom1fI4nWStYqXAAAEoZQn6vs942.png') repeat scroll 0% 0%; bottom: 2px;"></div>
+		</div>
+	</div>
+	<div class="nav">
+		<a href="http://www.51cto.com" class="logo"><img src="http://static3.51cto.com/51cto/cms/2016/images/nr_logo.png?v=0.1" alt=""></a>
+		<ul>
+			<li><a href="http://developer.51cto.com" class="active">开发频道</a></li>
+			<li><a href="http://developer.51cto.com">首页</a></li>
+			<li><a href="http://developer.51cto.com/web/">Web</a></li>
+			<li><a href="http://developer.51cto.com/col/1308/">架构&设计</a></li>
+			<li><a href="http://developer.51cto.com/col/585/">语言&工具</a></li>
+			<li><a href="http://developer.51cto.com/col/577/">大数据</a></li>
+		</ul>
+		<div class="nav-rsear">
+			<form method="post" action="http://www.51cto.com/php/search.php" name="searchform" target="_blank">
+				<input name="keyword" id="q" type="text" placeholder="输入您要搜索的内容" class="sear-1">
+				<input name="" type="submit" value="" class="sear-2">
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- 频道导航结束 -->
+
+<div class="main">
+    <!-- 左侧内容 -->
+    <div class="main_left">
+        <div class="wznr">
+            <h2>坐在马桶上看算法：只有五行的Floyd最短路算法</h2>
+            <p>此算法由Robert W. Floyd（罗伯特·弗洛伊德）于1962年发表在“Communications of the ACM”上。同年Stephen Warshall（史蒂芬·沃舍尔）也独立发表了这个算法。Robert W．Floyd这个牛人是朵奇葩，他原本在芝加哥大学读的文学，但是因为当时美国经济不太景气，找工作比较困难，无奈之下到西屋电气公司当了一名计算机操作员，在IBM650机房值夜班，并由此开始了他的计算机生涯。</p>
+            <dl>
+                <dt><span>作者：ahalei</span><span>来源：51CTO博客</span>|<em>2014-03-26 09:04</em></dt>
+                <dd>
+                	<div class="left" style="padding-right: 10px">
+                		<a href="javascript:favorBox('open');" title="一键收藏，随时查看，分享好友！" target="_self" class="bds_more1">&nbsp;收藏</a>
+                	</div>
+					<div class="bdsharebuttonbox left" data-tag="share_2">
+						<a href="javascript:;" class="bds_more" data-cmd="more">&nbsp;&nbsp;分享</a>
+					</div>
+                </dd>
+            </dl>
+        </div>
+        <div class="zwnr">
+            <h2><a href="http://boke.51cto.com/act/boke/website" target="_blank" style="text-decoration:none;">【新品产上线啦】51CTO播客，随时随地，碎片化学习</a></h2>
+            <p style="text-align: center"><span style="font-size: 16px; padding-bottom: 0px; padding-top: 0px; padding-left: 0px; margin: 0px; padding-right: 0px" sizset="29" sizcache02854355620519051="0"><img id="aimg_1959" class="zoom"  alt="081028t67l8vd73686e68m.png"  onreset="" onselect="" onunload="" onchange="" onsubmit="" src="http://s1.51cto.com/wyfs02/M00/23/1C/wKioL1MyKrDSFjpKAABU4EmV3Qc641.jpg-wh_651x-s_35035338.jpg" /></span></p>
+<p>暑假，小哼准备去一些城市旅游。有些城市之间有公路，有些城市之间则没有，如下图。为了节省经费以及方便计划旅程，小哼希望在出发之前知道任意两个城市之前的最短路程。</p>
+<p style="text-align: center"><img id="aimg_1960" alt="081028xjgvimgz7882qdu7.png" onreset="" onselect="" onunload="" onchange="" onsubmit="" src="http://s7.51cto.com/wyfs02/M02/23/1B/wKiom1MyKtiQEf2iAAApFLfvlAE293.jpg" /></p>
+<p style="text-align: left">上图中有4个城市8条公路，公路上的数字表示这条公路的长短。请注意这些公路是单向的。我们现在需要求任意两个城市之间的最短路程，也就是求任意两个点之间的最短路径。这个问题这也被称为&ldquo;多源最短路径&rdquo;问题。</p>
+<p>现在需要一个数据结构来存储图的信息，我们仍然可以用一个4*4的矩阵（二维数组e）来存储。比如1号城市到2号城市的路程为2，则设e[1][2]的值为2。2号城市无法到达4号城市，则设置e[2][4]的值为&infin;。另外此处约定一个城市自己是到自己的也是0，例如e[1][1]为0，具体如下。</p>
+<p style="text-align: center"><img id="aimg_1961" alt="081028o2n5ebn8hdeh9e5l.png" onreset="" onselect="" onunload="" onchange="" onsubmit="" src="http://s9.51cto.com/wyfs02/M00/23/1C/wKioL1MyKrCDi39tAAAiPbfsd-Y863.jpg" /></p>
+<p>现在回到问题：如何求任意两点之间最短路径呢？通过之前的学习我们知道通过深度或广度优先搜索可以求出两点之间的最短路径。所以进行n2遍深度或广度优先搜索，即对每两个点都进行一次深度或广度优先搜索，便可以求得任意两点之间的最短路径。可是还有没有别的方法呢？</p>
+<p>我们来想一想，根据我们以往的经验，如果要让任意两点（例如从顶点a点到顶点b）之间的路程变短，只能引入第三个点（顶点k），并通过这个顶点k中转即a-&gt;k-&gt;b，才可能缩短原来从顶点a点到顶点b的路程。那么这个中转的顶点k是1~n中的哪个点呢？甚至有时候不只通过一个点，而是经过两个点或者更多点中转会更短，即a-&gt;k1-&gt;k2b-&gt;或者a-&gt;k1-&gt;k2&hellip;-&gt;k-&gt;i&hellip;-&gt;b。比如上图中从4号城市到3号城市（4-&gt;3）的路程e[4][3]原本是12。如果只通过1号城市中转（4-&gt;1-&gt;3），路程将缩短为11（e[4][1]+e[1][3]=5+6=11）。其实1号城市到3号城市也可以通过2号城市中转，使得1号到3号城市的路程缩短为5（e[1][2]+e[2][3]=2+3=5）。所以如果同时经过1号和2号两个城市中转的话，从4号城市到3号城市的路程会进一步缩短为10。通过这个的例子，我们发现每个顶点都有可能使得另外两个顶点之间的路程变短。好，下面我们将这个问题一般化。</p>
+<p>当任意两点之间不允许经过第三个点时，这些城市之间最短路程就是初始路程，如下。</p>
+<p style="text-align: center"><img id="aimg_1962" alt="081029zdxxq919ttqt8tu8.png" onreset="" onselect="" onunload="" onchange="" onsubmit="" src="http://s1.51cto.com/wyfs02/M01/23/1C/wKioL1MyKrDDfAv9AAAiPbfsd-Y211.jpg" /></p>
+<p>如现在只允许经过1号顶点，求任意两点之间的最短路程，应该如何求呢？只需判断e[i][1]+e[1][j]是否比e[i][j]要小即可。e[i][j]表示的是从i号顶点到j号顶点之间的路程。e[i][1]+e[1][j]表示的是从i号顶点先到1号顶点，再从1号顶点到j号顶点的路程之和。其中i是1~n循环，j也是1~n循环，代码实现如下。</p>
+<pre><ol class="dp-j"><li class="alt"><span><span class="keyword">for</span><span>(i=</span><span class="number">1</span><span>;i&lt;=n;i++)&nbsp; &nbsp;</span></span></li><li><span>{&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(j=</span><span class="number">1</span><span>;j&lt;=n;j++)&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;</span><span class="keyword">if</span><span>&nbsp;(&nbsp;e[i][j]&nbsp;&gt;&nbsp;e[i][</span><span class="number">1</span><span>]+e[</span><span class="number">1</span><span>][j]&nbsp;)&nbsp; &nbsp;</span></li><li><span>e[i][j]&nbsp;=&nbsp;e[i][</span><span class="number">1</span><span>]+e[</span><span class="number">1</span><span>][j];&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp; &nbsp;</span></li><li><span>}&nbsp;</span></li></ol></pre>
+<p>在只允许经过1号顶点的情况下，任意两点之间的最短路程更新为：</p>
+<p style="text-align: center"><img id="aimg_1963" alt="081029itl7z7m4l9qqg56d.png" onreset="" onselect="" onunload="" onchange="" onsubmit="" src="http://s9.51cto.com/wyfs02/M02/23/1B/wKiom1MyKtixyd9aAAAimg6WCbM948.jpg" /></p>
+<p>通过上图我们发现：在只通过1号顶点中转的情况下，3号顶点到2号顶点（e[3][2]）、4号顶点到2号顶点（e[4][2]）以及4号顶点到3号顶点（e[4][3]）的路程都变短了。</p>
+<p>接下来继续求在只允许经过1和2号两个顶点的情况下任意两点之间的最短路程。如何做呢？我们需要在只允许经过1号顶点时任意两点的最短路程的结果下，再判断如果经过2号顶点是否可以使得i号顶点到j号顶点之间的路程变得更短。即判断e[i][2]+e[2][j]是否比e[i][j]要小，代码实现为如下。</p>
+<pre><ol class="dp-j"><li class="alt"><span><span class="comment">//经过1号顶点&nbsp; </span><span>&nbsp;</span></span></li><li><span class="keyword">for</span><span>(i=</span><span class="number">1</span><span>;i&lt;=n;i++)&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(j=</span><span class="number">1</span><span>;j&lt;=n;j++)&nbsp; &nbsp;</span></li><li><span>&nbsp;</span><span class="keyword">if</span><span>&nbsp;(e[i][j]&nbsp;&gt;&nbsp;e[i][</span><span class="number">1</span><span>]+e[</span><span class="number">1</span><span>][j])&nbsp;&nbsp;e[i][j]=e[i][</span><span class="number">1</span><span>]+e[</span><span class="number">1</span><span>][j];&nbsp; &nbsp;</span></li><li class="alt"><span class="comment">//经过2号顶点&nbsp; </span><span>&nbsp;</span></li><li><span class="keyword">for</span><span>(i=</span><span class="number">1</span><span>;i&lt;=n;i++)&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(j=</span><span class="number">1</span><span>;j&lt;=n;j++)&nbsp; &nbsp;</span></li><li><span>&nbsp;</span><span class="keyword">if</span><span>&nbsp;(e[i][j]&nbsp;&gt;&nbsp;e[i][</span><span class="number">2</span><span>]+e[</span><span class="number">2</span><span>][j])&nbsp;&nbsp;e[i][j]=e[i][</span><span class="number">2</span><span>]+e[</span><span class="number">2</span><span>][j];&nbsp;</span></li></ol></pre>
+<p>在只允许经过1和2号顶点的情况下，任意两点之间的最短路程更新为：</p>
+<p style="text-align: center"><img id="aimg_1964" alt="081029e7gjlaaul4zk7z4n.png" onreset="" onselect="" onunload="" onchange="" onsubmit="" src="http://s4.51cto.com/wyfs02/M00/23/1B/wKiom1MyKtjjpEHiAAAix7NGsrA796.jpg" /></p>
+<p>通过上图得知，在相比只允许通过1号顶点进行中转的情况下，这里允许通过1和2号顶点进行中转，使得e[1][3]和e[4][3]的路程变得更短了。</p>
+<p>同理，继续在只允许经过1、2和3号顶点进行中转的情况下，求任意两点之间的最短路程。任意两点之间的最短路程更新为：</p>
+<p style="text-align: center"><img id="aimg_1965" alt="081029pd747o8o87o07o7l.png" onreset="" onselect="" onunload="" onchange="" onsubmit="" src="http://s7.51cto.com/wyfs02/M01/23/1C/wKioL1MyKrGxpKlsAAAi4hPRt2k063.jpg" /></p>
+<p>最后允许通过所有顶点作为中转，任意两点之间最终的最短路程为：</p>
+<p style="text-align: center"><span style="font-size: 16px; padding-bottom: 0px; padding-top: 0px; padding-left: 0px; margin: 0px; padding-right: 0px" sizset="36" sizcache02854355620519051="0"><img id="aimg_1966" class="zoom"  alt="081030h7tmht7cs2h7qftu.png"  onreset="" onselect="" onunload="" onchange="" onsubmit="" src="http://s3.51cto.com/wyfs02/M02/23/1C/wKioL1MyKrHiJBcCAAAioTqzaQk771.jpg" /></span></p>
+<p>整个算法过程虽然说起来很麻烦，但是代码实现却非常简单，核心代码只有五行：</p>
+<pre><ol class="dp-j"><li class="alt"><span><span class="keyword">for</span><span>(k=</span><span class="number">1</span><span>;k&lt;=n;k++)&nbsp; &nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(i=</span><span class="number">1</span><span>;i&lt;=n;i++)&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;</span><span class="keyword">for</span><span>(j=</span><span class="number">1</span><span>;j&lt;=n;j++)&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">if</span><span>(e[i][j]&gt;e[i][k]+e[k][j])&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;e[i][j]=e[i][k]+e[k][j];&nbsp;</span></li></ol></pre>
+<p>这段代码的基本思想就是：最开始只允许经过1号顶点进行中转，接下来只允许经过1和2号顶点进行中转&hellip;&hellip;允许经过1~n号所有顶点进行中转，求任意两点之间的最短路程。用一句话概括就是：从i号顶点到j号顶点只经过前k号点的最短路程。其实这是一种&ldquo;动态规划&rdquo;的思想，关于这个思想我们将在《啊哈！算法2&mdash;&mdash;伟大思维闪耀时》在做详细的讨论。下面给出这个算法的完整代码：</p>
+<pre><ol class="dp-j"><li class="alt"><span><span>#include&nbsp;&lt;stdio.h&gt;&nbsp; &nbsp;</span></span></li><li><span class="keyword">int</span><span>&nbsp;main()&nbsp; &nbsp;</span></li><li class="alt"><span>{&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;e[</span><span class="number">10</span><span>][</span><span class="number">10</span><span>],k,i,j,n,m,t1,t2,t3;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">int</span><span>&nbsp;inf=</span><span class="number">99999999</span><span>;&nbsp;</span><span class="comment">//用inf(infinity的缩写)存储一个我们认为的正无穷值&nbsp; </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//读入n和m，n表示顶点个数，m表示边的条数&nbsp; </span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;scanf(</span><span class="string">&quot;%d&nbsp;%d&quot;</span><span>,&amp;n,&amp;m);&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//初始化&nbsp; </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(i=</span><span class="number">1</span><span>;i&lt;=n;i++)&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;</span><span class="keyword">for</span><span>(j=</span><span class="number">1</span><span>;j&lt;=n;j++)&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">if</span><span>(i==j)&nbsp;e[i][j]=</span><span class="number">0</span><span>;&nbsp; &nbsp;</span></li><li class="alt"><span class="keyword">else</span><span>&nbsp;e[i][j]=inf;&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//读入边&nbsp; </span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(i=</span><span class="number">1</span><span>;i&lt;=m;i++)&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;scanf(</span><span class="string">&quot;%d&nbsp;%d&nbsp;%d&quot;</span><span>,&amp;t1,&amp;t2,&amp;t3);&nbsp; &nbsp;</span></li><li><span>&nbsp;e[t1][t2]=t3;&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//Floyd-Warshall算法核心语句&nbsp; </span><span>&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(k=</span><span class="number">1</span><span>;k&lt;=n;k++)&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;</span><span class="keyword">for</span><span>(i=</span><span class="number">1</span><span>;i&lt;=n;i++)&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(j=</span><span class="number">1</span><span>;j&lt;=n;j++)&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;</span><span class="keyword">if</span><span>(e[i][j]&gt;e[i][k]+e[k][j]&nbsp;)&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e[i][j]=e[i][k]+e[k][j];&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">//输出最终的结果&nbsp; </span><span>&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(i=</span><span class="number">1</span><span>;i&lt;=n;i++)&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(j=</span><span class="number">1</span><span>;j&lt;=n;j++)&nbsp; &nbsp;</span></li><li><span>&nbsp;{&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(</span><span class="string">&quot;%10d&quot;</span><span>,e[i][j]);&nbsp; &nbsp;</span></li><li><span>&nbsp;}&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;printf(</span><span class="string">&quot;\n&quot;</span><span>);&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">return</span><span>&nbsp;</span><span class="number">0</span><span>;&nbsp; &nbsp;</span></li><li class="alt"><span>}&nbsp;</span></li></ol></pre>
+<p>有一点需要注意的是：如何表示正无穷。我们通常将正无穷定义为99999999，因为这样即使两个正无穷相加，其和仍然不超过int类型的范围（C语言int类型可以存储的最大正整数是2147483647）。在实际应用中最好估计一下最短路径的上限，只需要设置比它大一点既可以。例如有100条边，每条边不超过100的话，只需将正无穷设置为10001即可。如果你认为正无穷和其它值相加得到一个大于正无穷的数是不被允许的话，我们只需在比较的时候加两个判断条件就可以了，请注意下面代码中带有下划线的语句。</p>
+<pre><ol class="dp-j"><li class="alt"><span><span class="comment">//Floyd-Warshall算法核心语句&nbsp; </span><span>&nbsp;</span></span></li><li><span class="keyword">for</span><span>(k=</span><span class="number">1</span><span>;k&lt;=n;k++)&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;</span><span class="keyword">for</span><span>(i=</span><span class="number">1</span><span>;i&lt;=n;i++)&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">for</span><span>(j=</span><span class="number">1</span><span>;j&lt;=n;j++)&nbsp; &nbsp;</span></li><li class="alt"><span>&nbsp;</span><span class="keyword">if</span><span>(e[i][k]&lt;inf&nbsp;&amp;&amp;&nbsp;e[k][j]&lt;inf&nbsp;&amp;&amp;&nbsp;e[i][j]&gt;e[i][k]+e[k][j])&nbsp; &nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e[i][j]=e[i][k]+e[k][j];&nbsp;</span></li></ol></pre>
+<p>上面代码的输入数据样式为：</p>
+<pre><ol class="dp-j"><li class="alt"><span><span class="number">4</span><span>&nbsp;</span><span class="number">8</span><span>&nbsp; &nbsp;</span></span></li><li><span class="number">1</span><span>&nbsp;</span><span class="number">2</span><span>&nbsp;</span><span class="number">2</span><span>&nbsp; &nbsp;</span></li><li class="alt"><span class="number">1</span><span>&nbsp;</span><span class="number">3</span><span>&nbsp;</span><span class="number">6</span><span>&nbsp; &nbsp;</span></li><li><span class="number">1</span><span>&nbsp;</span><span class="number">4</span><span>&nbsp;</span><span class="number">4</span><span>&nbsp; &nbsp;</span></li><li class="alt"><span class="number">2</span><span>&nbsp;</span><span class="number">3</span><span>&nbsp;</span><span class="number">3</span><span>&nbsp; &nbsp;</span></li><li><span class="number">3</span><span>&nbsp;</span><span class="number">1</span><span>&nbsp;</span><span class="number">7</span><span>&nbsp; &nbsp;</span></li><li class="alt"><span class="number">3</span><span>&nbsp;</span><span class="number">4</span><span>&nbsp;</span><span class="number">1</span><span>&nbsp; &nbsp;</span></li><li><span class="number">4</span><span>&nbsp;</span><span class="number">1</span><span>&nbsp;</span><span class="number">5</span><span>&nbsp; &nbsp;</span></li><li class="alt"><span class="number">4</span><span>&nbsp;</span><span class="number">3</span><span>&nbsp;</span><span class="number">12</span><span>&nbsp;</span></li></ol></pre>
+<p>第一行两个数为n和m，n表示顶点个数，m表示边的条数。</p>
+<p>接下来m行，每一行有三个数t1、t2 和t3，表示顶点t1到顶点t2的路程是t3。</p>
+<p>得到最终结果如下：</p>
+<p style="text-align: center"><img id="aimg_1967" alt="081030is22w3mmnz3r33m3.png" onreset="" onselect="" onunload="" onchange="" onsubmit="" src="http://s1.51cto.com/wyfs02/M00/23/1B/wKiom1MyKtnRaui7AAAiIc6AlNg084.jpg" /></p>
+<p>通过这种方法我们可以求出任意两个点之间最短路径。它的时间复杂度是O(N3)。令人很震撼的是它竟然只有五行代码，实现起来非常容易。正是因为它实现起来非常容易，如果时间复杂度要求不高，使用Floyd-Warshall来求指定两点之间的最短路或者指定一个点到其余各个顶点的最短路径也是可行的。当然也有更快的算法，请看下一节：Dijkstra算法。</p>
+<p>另外需要注意的是：Floyd-Warshall算法不能解决带有&ldquo;负权回路&rdquo;（或者叫&ldquo;负权环&rdquo;）的图，因为带有&ldquo;负权回路&rdquo;的图没有最短路。例如下面这个图就不存在1号顶点到3号顶点的最短路径。因为1-&gt;2-&gt;3-&gt;1-&gt;2-&gt;3-&gt;&hellip;-&gt;1-&gt;2-&gt;3这样路径中，每绕一次1-&gt;-2&gt;3这样的环，最短路就会减少1，永远找不到最短路。其实如果一个图中带有&ldquo;负权回路&rdquo;那么这个图则没有最短路。</p>
+<p style="text-align: center"><img id="aimg_1968" alt="081030elthvel6et6k886y.png" onreset="" onselect="" onunload="" onchange="" onsubmit="" src="http://s9.51cto.com/wyfs02/M01/23/1B/wKiom1MyKtny9TMPAAAUSSCT5WA988.jpg" /></p>
+<p>此算法由Robert W. Floyd（罗伯特&middot;弗洛伊德）于1962年发表在&ldquo;Communications of the ACM&rdquo;上。同年Stephen Warshall（史蒂芬&middot;沃舍尔）也独立发表了这个算法。Robert W．Floyd这个牛人是朵奇葩，他原本在芝加哥大学读的文学，但是因为当时美国经济不太景气，找工作比较困难，无奈之下到西屋电气公司当了一名计算机操作员，在IBM650机房值夜班，并由此开始了他的计算机生涯。此外他还和J.W.J. Williams（威廉姆斯）于1964年共同发明了著名的堆排序算法HEAPSORT。堆排序算法我们将在第七章学习。Robert W．Floyd在1987年获得了图灵奖。</p>
+<p>博客地址：<a href="http://ahalei.blog.51cto.com/4767671/1383613">http://ahalei.blog.51cto.com/4767671/1383613</a></p><p>【编辑推荐】</p><div><ol><li><a href=http://developer.51cto.com/art/201402/429294.htm target='_blank'>程序员如何快速准备面试中的算法</a></li><li><a href=http://developer.51cto.com/art/201403/430986.htm target='_blank'>坐在马桶上看算法：快速排序</a></li><li><a href=http://developer.51cto.com/art/201403/433023.htm target='_blank'>为什么说任何基于比较的算法将5个元素排序都需要7次？</a></li><li><a href=http://developer.51cto.com/art/201403/433109.htm target='_blank'>细数那些改变计算技术的伟大算法</a></li><li><a href=http://developer.51cto.com/art/201403/433222.htm target='_blank'>灵感编程：最大公约数算法解析</a></li></ol></div><DIV align=right>【责任编辑：<A class=ln href="mailto:linss@51cto.com">林师授</A> TEL：（010）68476606】</DIV><br>
+            <a href="###" class="dzdz zhan" target="_self">点赞 <span>0</span></a>
+        </div>
+        <div class="share5">
+            <ul>
+                <li><a href='http://www.51cto.com/php/search.php?keyword=%CB%E3%B7%A8' target='_blank' class='underline'>算法</a>&nbsp;&nbsp;<a href='http://www.51cto.com/php/search.php?keyword=Floyd' target='_blank' class='underline'>Floyd</a>&nbsp;&nbsp;<a href='http://www.51cto.com/php/search.php?keyword=%D7%EE%B6%CC%CB%E3%B7%A8' target='_blank' class='underline'>最短算法</a></li>
+            </ul>
+            <dl>
+                <dt><em>分享:</em>
+<div class="bdsharebuttonbox" data-tag="share_1">
+    <a class="wb" data-cmd="tsina"></a>
+    <a class="wx" data-cmd="weixin"></a>
+    <a class="more" data-cmd="more"></a>
+</div>
+</dt>
+<script type="text/javascript">
+    window._bd_share_config = {
+        common : {
+            bdText : document.title
+        },
+        share : [{
+            "bdSize" : 16,
+        }]
+    }
+    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<!-- Baidu Button END -->
+            </dl>
+        </div>
+        <div class="nrdp comment">
+            <script charset="utf-8" id="ParadigmSDKv3" src="https://nbrecsys.4paradigm.com/sdk/js/ParadigmSDK_v3.js"></script>
+<!--<div id='c21148bdd1e7483e87966a00982902d4'></div>-->
+<script>
+	var host = window.location.host;
+	var domain_prefix = host.replace(/\.51cto\.com/, '');
+	function appendRecommend(){
+		$(".share5").prepend("<div id='c21148bdd1e7483e87966a00982902d4'></div>");
+	}
+	function clock(){
+		$(".dzk").hide();
+		var isShow = $(".dzk").css("display");
+		if(isShow == 'none'){
+			clearInterval(timer);
+		}
+	}
+	if(domain_prefix == 'developer') {
+		appendRecommend();
+		ParadigmSDKv3.init("dcde33d0dc6845609e9cb47f754d1094");
+		ParadigmSDKv3.renderArticle('c21148bdd1e7483e87966a00982902d4',346,605);
+		var timer = setInterval("clock()",50);
+	}
+</script>
+<div class='comment center'>
+	<div class='inner center' id="cmscmt_iframe"></div>
+</div>
+<script type="text/javascript" id="UYScript" src="http://comment.51cto.com/static/js/api_js/iframe_cmt.js" async=""></script>
+
+        </div>
+        <div class="dzk">
+            <dl><dt class="show">大家都在看</dt><dt>猜你喜欢</dt></dl>
+            <div>
+                <ul>
+                    <li class="show">
+                        <div class="djdzk" id="djdzk">
+                        </div>
+                    </li>
+                    <li>
+                       <div class="djdzk" id="cnxh"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 文章左侧结束 -->
+    <!-- 文章右侧 -->
+    <div class="wrap_right">
+        <div><!-- intel广告位 -->
+
+<span class="mtgg" id="right1_ad" style="height:auto; width:300px;margin-bottom: 10px;">
+
+<script type="text/javascript">
+var s=window.location.toString();
+var s1=s.substr(7,s.length);
+var s2=s1.indexOf(".");
+s=s.substr(7,s2);
+if ( s == 'stor') {
+    var m3_u = (location.protocol=='https:'?'https://gg.51cto.com/www/delivery/ajs.php':'http://gg1.51cto.com/www/delivery/ajs.php');
+    var m3_r = Math.floor(Math.random()*99999999999);
+    if (!document.MAX_used) document.MAX_used = ',';
+    document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+    document.write ("?zoneid=987");
+    document.write ('&amp;cb=' + m3_r);
+    if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+    document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+    document.write ("&amp;loc=" + escape(window.location));
+    if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+    if (document.context) document.write ("&context=" + escape(document.context));
+    if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+    document.write ("'><\/scr"+"ipt>");
+
+}else if (s == 'server'){
+    var m3_u = (location.protocol=='https:'?'https://gg.51cto.com/www/delivery/ajs.php':'http://gg1.51cto.com/www/delivery/ajs.php');
+    var m3_r = Math.floor(Math.random()*99999999999);
+    if (!document.MAX_used) document.MAX_used = ',';
+    document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+    document.write ("?zoneid=1061");
+    document.write ('&amp;cb=' + m3_r);
+    if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+    document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+    document.write ("&amp;loc=" + escape(window.location));
+    if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+    if (document.context) document.write ("&context=" + escape(document.context));
+    if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+    document.write ("'><\/scr"+"ipt>");
+
+}else if(s == 'network'){
+    var m3_u = (location.protocol=='https:'?'https://gg.51cto.com/www/delivery/ajs.php':'http://gg1.51cto.com/www/delivery/ajs.php');
+    var m3_r = Math.floor(Math.random()*99999999999);
+    if (!document.MAX_used) document.MAX_used = ',';
+    document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+    document.write ("?zoneid=985");
+    document.write ('&amp;cb=' + m3_r);
+    if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+    document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+    document.write ("&amp;loc=" + escape(window.location));
+    if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+    if (document.context) document.write ("&context=" + escape(document.context));
+    if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+    document.write ("'><\/scr"+"ipt>");
+
+//    var str = '<div class="m30" style="position:relative;">';
+//    str += '<iframe src="http://network.51cto.com/act/cisco/art201709" scrolling="no" frameborder="0" sytle="" width="300" align="middle" height="360" target ="_parent"></iframe>';
+//    str +='<div style="left: 0px; width: 24px; height: 14px; z-index: 12; position: absolute; background: transparent url(http://s5.51cto.com/wyfs02/M00/86/BB/wKiom1fI4nWStYqXAAAEoZQn6vs942.png)repeat scroll 0% 0%; bottom: 2px;"></div>';
+//    str	+= '</div>';
+//    $('#right1_ad').html(str);
+}
+// var timestamp = Date.parse(new Date());
+//timestamp = timestamp / 1000;
+    if (s == 'cloud') {
+//    var str = "<ins class='dcmads' style='display:inline-block;width:300px;height:360px' data-dcm-placement='N5751.51CTO/B11527656.153459357' data-dcm-rendering-mode='script' data-dcm-http-only data-dcm-app-id=''></ins>";
+//
+//        $('#right1_ad').html(str);
+        //1496592000
+        var m3_u = (location.protocol=='https:'?'https://gg.51cto.com/www/delivery/ajs.php':'http://gg3.51cto.com/www/delivery/ajs.php');
+        var m3_r = Math.floor(Math.random()*99999999999);
+        if (!document.MAX_used) document.MAX_used = ',';
+        document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+        document.write ("?zoneid=969");
+        document.write ('&amp;cb=' + m3_r);
+        if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+        document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+        document.write ("&amp;loc=" + escape(window.location));
+        if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+        if (document.context) document.write ("&context=" + escape(document.context));
+        if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+        document.write ("'><\/scr"+"ipt>");
+    }
+    if (s == 'bigdata') {
+        var m3_u = (location.protocol=='https:'?'https://gg.51cto.com/www/delivery/ajs.php':'http://gg2.51cto.com/www/delivery/ajs.php');
+        var m3_r = Math.floor(Math.random()*99999999999);
+        if (!document.MAX_used) document.MAX_used = ',';
+        document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+        document.write ("?zoneid=970");
+        document.write ('&amp;cb=' + m3_r);
+        if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+        document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+        document.write ("&amp;loc=" + escape(window.location));
+        if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+        if (document.context) document.write ("&context=" + escape(document.context));
+        if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+        document.write ("'><\/scr"+"ipt>");
+    }
+//var timestamp = Date.parse(new Date());
+//timestamp = timestamp / 1000;
+//    if(s == 'netsecurity'&& (timestamp >= 1506182400)){
+//        var str = '<div class="m30" style="position:relative;">';
+//    str += '<iframe src="http://netsecurity.51cto.com/act/cisco/art201709" scrolling="no" frameborder="0" sytle="" width="300" align="middle" height="360" target ="_parent"></iframe>';
+//    str +='<div style="left: 0px; width: 24px; height: 14px; z-index: 12; position: absolute; background: transparent url(http://s5.51cto.com/wyfs02/M00/86/BB/wKiom1fI4nWStYqXAAAEoZQn6vs942.png)repeat scroll 0% 0%; bottom: 2px;"></div>';
+//    str	+= '</div>';
+//    $('#right1_ad').html(str);
+//    }
+</script>
+    <script src='http://www.googletagservices.com/dcm/dcmads.js'></script>
+    </span></div>
+        <div class="mtgg m30"><script type="text/javascript" src="http://image.51cto.com/ad/art/hzh/ad.js"></script></div>
+        <div><!--推荐系统start-->
+<script charset="utf-8" id="ParadigmSDKv3" src="https://nbrecsys.4paradigm.com/sdk/js/ParadigmSDK_v3.js"></script>
+<style>
+    .article-box{margin-bottom: 20px;}
+</style>
+<div id='279ee0c8d3f94395a91a27085384c3b9'></div>
+<script>
+    var host = window.location.host;
+    var domain_prefix = host.replace(/\.51cto\.com/, '');
+    ParadigmSDKv3.init("dcde33d0dc6845609e9cb47f754d1094");
+    if(domain_prefix == 'developer'){
+        ParadigmSDKv3.renderArticle('279ee0c8d3f94395a91a27085384c3b9',346,682);
+    }else{
+        ParadigmSDKv3.renderArticle('279ee0c8d3f94395a91a27085384c3b9',269,460);
+    }
+    var timer = setInterval("clock()",50);
+    var clock = function(){
+        $('.paradigm-recomm-logo').css({'width':'100px'});
+        var w = $('.paradigm-recomm-logo').width();
+        if(w == 100){
+            clearInterval(timer);
+        }
+    }
+</script>
+<!--推荐系统end-->
+</div>
+        <div class="bjtj m30">
+            <h2><span>编辑推荐</span></h2>
+            <dl><dt>头条</dt><dd><a href="http://developer.51cto.com/art/201809/584260.htm" title="你没听说过的Go语言惊人优点">你没听说过的Go语言惊人优点</a></dd></dl><dl><dt>热点</dt><dd><a href="http://developer.51cto.com/art/201809/584232.htm" title="会了这十种Python优雅的写法，让你工作效率翻十倍，一人顶十人用">会了这十种Python优雅的写法，让你工作效率翻十倍，一人顶十人用</a></dd></dl><dl><dt>关注</dt><dd><a href="http://developer.51cto.com/art/201809/584238.htm" title="程序员10种编程语言写Hello World，你会的有哪几个？">程序员10种编程语言写Hello World，你会的有哪几个？</a></dd></dl><dl><dt>头条</dt><dd><a href="http://news.51cto.com/art/201809/584121.htm" title="Oracle 官宣Java 11 / JDK 11 正式发布！值得关注">Oracle 官宣Java 11 / JDK 11 正式发布！值得关注</a></dd></dl><dl><dt>热点</dt><dd><a href="http://developer.51cto.com/art/201809/584047.htm" title="程序员动辄几万的工资真的是虚高吗？">程序员动辄几万的工资真的是虚高吗？</a></dd></dl>
+        </div>
+        <div></div>
+        <div class="news m30">
+            <dl><dt class="show">24H热文</dt><dt>一周话题</dt><dt>本月最赞</dt></dl>
+            <ul><li class="show"><a href=http://developer.51cto.com/art/201403/430986.htm title=坐在马桶上看算法：快速排序>坐在马桶上看算法：快速排序</a><a href=http://developer.51cto.com/art/201308/405973.htm title=成人网站YouPorn使用Redis之经验谈>成人网站YouPorn使用Redis之经验谈</a><a href=http://developer.51cto.com/art/201809/584177.htm title=小心踩雷！一个小小的正则表达式竟把CPU拖垮......>小心踩雷！一个小小的正则表达式竟把CPU拖垮......</a><a href=http://zhuanlan.51cto.com/art/201810/584509.htm title=三行Python代码，让数据预处理速度提高2到6倍>三行Python代码，让数据预处理速度提高2到6倍</a><a href=http://developer.51cto.com/art/201711/559601.htm title=为什么比起IntelliJ IDEA，我仍然更喜欢Eclipse>为什么比起IntelliJ IDEA，我仍然更喜欢Eclipse</a><a href=http://developer.51cto.com/art/201710/554633.htm title=放弃Dubbo，选择最流行的Spring Cloud微服务架构实践与经验总结>放弃Dubbo，选择最流行的Spring Cloud微服务架构实践与经验总结</a><a href=http://news.51cto.com/art/201810/584546.htm title=TIOBE 10 月排行榜：C++ 夺回前三，Swift 进入前十>TIOBE 10 月排行榜：C++ 夺回前三，Swift 进入前十</a><a href=http://developer.51cto.com/art/201710/555200.htm title=Go语言的9大优势和3大缺点>Go语言的9大优势和3大缺点</a></li><li><a href=http://developer.51cto.com/art/201403/430986.htm title=坐在马桶上看算法：快速排序>坐在马桶上看算法：快速排序</a><a href=http://developer.51cto.com/art/201308/405973.htm title=成人网站YouPorn使用Redis之经验谈>成人网站YouPorn使用Redis之经验谈</a><a href=http://developer.51cto.com/art/201711/559601.htm title=为什么比起IntelliJ IDEA，我仍然更喜欢Eclipse>为什么比起IntelliJ IDEA，我仍然更喜欢Eclipse</a><a href=http://developer.51cto.com/art/201710/555200.htm title=Go语言的9大优势和3大缺点>Go语言的9大优势和3大缺点</a><a href=http://developer.51cto.com/art/201809/584177.htm title=小心踩雷！一个小小的正则表达式竟把CPU拖垮......>小心踩雷！一个小小的正则表达式竟把CPU拖垮......</a><a href=http://developer.51cto.com/art/201403/431118.htm title=用.NET开发的磁力搜索引擎：Btbook.net>用.NET开发的磁力搜索引擎：Btbook.net</a><a href=http://developer.51cto.com/art/201710/554633.htm title=放弃Dubbo，选择最流行的Spring Cloud微服务架构实践与经验总结>放弃Dubbo，选择最流行的Spring Cloud微服务架构实践与经验总结</a><a href=http://zhuanlan.51cto.com/art/201810/584509.htm title=三行Python代码，让数据预处理速度提高2到6倍>三行Python代码，让数据预处理速度提高2到6倍</a></li><li><a href=http://developer.51cto.com/art/201403/430986.htm title=坐在马桶上看算法：快速排序>坐在马桶上看算法：快速排序</a><a href=http://developer.51cto.com/art/201308/405973.htm title=成人网站YouPorn使用Redis之经验谈>成人网站YouPorn使用Redis之经验谈</a><a href=http://developer.51cto.com/art/201710/555200.htm title=Go语言的9大优势和3大缺点>Go语言的9大优势和3大缺点</a><a href=http://developer.51cto.com/art/201711/559601.htm title=为什么比起IntelliJ IDEA，我仍然更喜欢Eclipse>为什么比起IntelliJ IDEA，我仍然更喜欢Eclipse</a><a href=http://developer.51cto.com/art/201710/554633.htm title=放弃Dubbo，选择最流行的Spring Cloud微服务架构实践与经验总结>放弃Dubbo，选择最流行的Spring Cloud微服务架构实践与经验总结</a><a href=http://developer.51cto.com/art/201809/583191.htm title=开发者必看：25个最好的编程网站，你知道几个？>开发者必看：25个最好的编程网站，你知道几个？</a><a href=http://developer.51cto.com/art/201801/565183.htm title=爬虫需谨慎，你不知道的爬虫与反爬虫套路！>爬虫需谨慎，你不知道的爬虫与反爬虫套路！</a><a href=http://developer.51cto.com/art/201711/557514.htm title=一文读懂JavaScript和ECMAScript的区别>一文读懂JavaScript和ECMAScript的区别</a></li></ul>
+        </div>
+        <div><div class="areaAd mt5" id="ad_1"></div>
+<div style="display:none">
+<span id="ad1">
+
+<script type='text/javascript'><!--//<![CDATA[
+var m3_u = (location.protocol=='https:'?'https://gg.51cto.com/www/delivery/ajs.php':'http://gg3.51cto.com/www/delivery/ajs.php');
+var m3_r = Math.floor(Math.random()*99999999999);
+if (!document.MAX_used) document.MAX_used = ',';
+document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+document.write ("?zoneid=693");
+document.write ('&amp;cb=' + m3_r);
+if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+document.write ("&amp;loc=" + escape(window.location));
+if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+if (document.context) document.write ("&context=" + escape(document.context));
+if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+document.write ("'><\/scr"+"ipt>");
+//]]>--></script><noscript><a href='//gg2.51cto.com/www/delivery/ck.php?n=ae95ac07&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='//gg.51cto.com/www/delivery/avw.php?zoneid=693&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=ae95ac07' border='0' alt='' /></a></noscript>
+</span>
+    </div>
+<script>
+    document.getElementById('ad_1').innerHTML = document.getElementById('ad1').innerHTML;
+</script></div>
+        <div class="spkc m30">
+            <h2><span>视频课程</span><a href="http://edu.51cto.com/">+更多</a></h2>
+            
+            <dl>
+                <dt><a href="http://edu.51cto.com/course/course_id-1158.html"><img src="https://s1.51cto.com/images/201607/960b5f0330b14117bbd2809828dcd5f1723b6e_small.jpg" title="【王佩丰】Excel 2010数据透视表视频教程 完整版" alt="【王佩丰】Excel 2010数据透视表视频教程 完整版" width="100px" height="80px"></a><span></span></dt>
+                <dd>
+                    <h3><a href="http://edu.51cto.com/course/course_id-1158.html" target="_blank" title="【王佩丰】Excel 2010数据透视表视频教程 完整版">【王佩丰】Excel 2010数据透视表视频教程 完</a></h3>
+                    <h4><span class="fl">讲师：<em><a href="http://edu.51cto.com/lecturer/user_id-1129943.html" target="_blank">王佩丰</a></em></span><span class="fr"><em>226725</em>人学习过</span></h4>
+                </dd>
+            </dl>
+            
+            <dl>
+                <dt><a href="http://edu.51cto.com/course/course_id-848.html"><img src="https://s1.51cto.com/images/201612/38e85780502d44792e26396d712989b9976432_small.jpg" title="2017软考信息系统项目管理师-项目管理(上) 视频教程" alt="2017软考信息系统项目管理师-项目管理(上) 视频教程" width="100px" height="80px"></a><span></span></dt>
+                <dd>
+                    <h3><a href="http://edu.51cto.com/course/course_id-848.html" target="_blank" title="2017软考信息系统项目管理师-项目管理(上) 视频教程">2017软考信息系统项目管理师-项目管理(上) 视</a></h3>
+                    <h4><span class="fl">讲师：<em><a href="http://edu.51cto.com/lecturer/user_id-8371666.html" target="_blank">小任老师</a></em></span><span class="fr"><em>126135</em>人学习过</span></h4>
+                </dd>
+            </dl>
+            
+            <dl>
+                <dt><a href="http://edu.51cto.com/course/course_id-3284.html"><img src="https://s1.51cto.com/wyfs02/M02/5C/01/wKioL1UZChygwhQXAAF8Qky2pw4080_small.jpg" title="Juniper入门与提高实战视频课程【大侠唐在飞出品】" alt="Juniper入门与提高实战视频课程【大侠唐在飞出品】" width="100px" height="80px"></a><span></span></dt>
+                <dd>
+                    <h3><a href="http://edu.51cto.com/course/course_id-3284.html" target="_blank" title="Juniper入门与提高实战视频课程【大侠唐在飞出品】">Juniper入门与提高实战视频课程【大侠唐在飞</a></h3>
+                    <h4><span class="fl">讲师：<em><a href="http://edu.51cto.com/lecturer/user_id-23357.html" target="_blank">大侠唐在飞</a></em></span><span class="fr"><em>30797</em>人学习过</span></h4>
+                </dd>
+            </dl>
+            
+        </div>
+        <div></div>
+        <div></div>
+        <div class="zxzt m30">
+            <h2><span>最新专题</span><a href="http://developer.51cto.com/speclist/1001">+更多</a></h2>
+            <dl>
+                <dt><a href="http://developer.51cto.com/art/201707/545815.htm" title="未来即将“触脸可及”，人脸识别技术大揭秘！"><img src="https://s4.51cto.com/wyfs02/M01/9C/D8/wKioL1l251iwv8XxAAA_QQD3COk594.jpg-wh_100x70-s_2093543473.jpg" alt="未来即将“触脸可及”，人脸识别技术大揭秘！" title="未来即将“触脸可及”，人脸识别技术大揭秘！"></a></dt>
+                <dd>
+                    <a href="http://developer.51cto.com/art/201707/545815.htm" title="未来即将“触脸可及”，人脸识别技术大揭秘！">未来即将“触脸可及”，人脸识别技术大揭秘！</a>
+                    <h3><a href='http://www.51cto.com/php/search.php?keyword=%CE%B4%C0%B4'>未来</a></h3>
+                </dd>
+            </dl><dl>
+                <dt><a href="http://developer.51cto.com/art/201706/543383.htm" title="关于智能运维的探索与实践"><img src="https://s4.51cto.com/wyfs02/M02/99/FA/wKiom1lPvLGxzRtxAAAlV-qqU_o972.jpg-wh_100x70-s_3931115996.jpg" alt="关于智能运维的探索与实践" title="关于智能运维的探索与实践"></a></dt>
+                <dd>
+                    <a href="http://developer.51cto.com/art/201706/543383.htm" title="关于智能运维的探索与实践">关于智能运维的探索与实践</a>
+                    <h3><a href='http://www.51cto.com/php/search.php?keyword=%D6%C7%C4%DC%D4%CB%CE%AC'>智能运维</a></h3>
+                </dd>
+            </dl><dl>
+                <dt><a href="http://developer.51cto.com/art/201706/541315.htm" title="智慧城市的背后是与前沿技术的深度挖掘和利用"><img src="https://s4.51cto.com/wyfs02/M02/97/86/wKiom1kveCXTMrm0AAAe3HW6rE8315.jpg-wh_100x70-s_2438833576.jpg" alt="智慧城市的背后是与前沿技术的深度挖掘和利用" title="智慧城市的背后是与前沿技术的深度挖掘和利用"></a></dt>
+                <dd>
+                    <a href="http://developer.51cto.com/art/201706/541315.htm" title="智慧城市的背后是与前沿技术的深度挖掘和利用">智慧城市的背后是与前沿技术的深度挖掘和利用</a>
+                    <h3><a href='http://www.51cto.com/php/search.php?keyword=%D6%C7%BB%DB%B3%C7%CA%D0'>智慧城市</a></h3>
+                </dd>
+            </dl><dl>
+                <dt><a href="http://developer.51cto.com/art/201703/535840.htm" title="HTML5游戏开发难点之效率、性能和加载量"><img src="http://s1.51cto.com/wyfs02/M02/8F/4F/wKioL1ja_tKzrdjaAAB-g-JwyP8927.jpg-wh_100x70-s_3222899076.jpg" alt="HTML5游戏开发难点之效率、性能和加载量" title="HTML5游戏开发难点之效率、性能和加载量"></a></dt>
+                <dd>
+                    <a href="http://developer.51cto.com/art/201703/535840.htm" title="HTML5游戏开发难点之效率、性能和加载量">HTML5游戏开发难点之效率、性能和加载量</a>
+                    <h3><a href='http://www.51cto.com/php/search.php?keyword=HTML5%D3%CE%CF%B7'>HTML5游戏</a></h3>
+                </dd>
+            </dl>
+        </div>
+        <div></div>
+        <div id="jcpl"></div>
+        <div></div>
+        <div class="news m30">
+            <dl><dt class="show">精选博文</dt><dt>论坛热帖</dt><dt>下载排行</dt></dl>
+            <div>
+                <ul>
+                    <li class="show">
+                        <a href="http://waringid.blog.51cto.com/65148/52013/" target="_blank" title="Linux下GA-945GZM-S2网卡驱动安装">Linux下GA-945GZM-S2网卡驱动安装</a><a href="http://windows.blog.51cto.com/92193/51981/" target="_blank" title="全面降低windows系统的安全隐患 (四)">全面降低windows系统的安全隐患 (四)</a><a href="http://waringid.blog.51cto.com/65148/51947/" target="_blank" title="启用yum升级RedHat Linux Enterprise">启用yum升级RedHat Linux Enterprise</a><a href="http://zhangjunhd.blog.51cto.com/113473/51938/" target="_blank" title="图解Tomcat5.0下配置数据库连接池">图解Tomcat5.0下配置数据库连接池</a><a href="http://hellen.blog.51cto.com/190231/51937/" target="_blank" title="秋之银杏林">秋之银杏林</a>
+                    </li>
+                    <li>
+                        <a href="http://bbs.51cto.com/thread-1175788-1.html" target="_blank" title="Office 365新老、第三方邮箱邮件自动关联同步">Office 365新老、第三方邮箱邮件自动</a><a href="http://bbs.51cto.com/thread-1435503-1.html" target="_blank" title="SQL Server找出缺失的时间点">SQL Server找出缺失的时间点</a><a href="http://bbs.51cto.com/thread-1467889-1.html" target="_blank" title="Python会是下一个PHP吗？">Python会是下一个PHP吗？</a><a href="http://bbs.51cto.com/thread-1470474-1.html" target="_blank" title="致：论坛午饭的一封信">致：论坛午饭的一封信</a><a href="http://bbs.51cto.com/thread-1470732-1.html" target="_blank" title="【我眼中的自己】教师-计算机老师-打杂是主业，上课是副业">【我眼中的自己】教师-计算机老师-打</a>
+                    </li>
+                    <li>
+                        <a href="http://down.51cto.com/data/1272590/" target="_blank" title="ERP中有哪些 “欧典现象”">ERP中有哪些 “欧典现象”</a><a href="http://down.51cto.com/data/1272589/" target="_blank" title="ERP“削足适履”与“双向位移”">ERP“削足适履”与“双向位移”</a><a href="http://down.51cto.com/data/1272588/" target="_blank" title="ERP 谨慎处理退货作业">ERP 谨慎处理退货作业</a><a href="http://down.51cto.com/data/1272587/" target="_blank" title="ERP乱相搅局企业资源管理">ERP乱相搅局企业资源管理</a><a href="http://down.51cto.com/data/1272586/" target="_blank" title="ERP与SCM的比较分析">ERP与SCM的比较分析</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div></div>
+        <div class="ds m30">
+            <h2><span>读 书 </span><a href="http://book.51cto.com/">+更多</a></h2>
+            <dl>
+                
+                <dt><a href="http://book.51cto.com/art/200704/46270.htm" title="网管员必读—网络应用（第2版）"><img src="http://images.51cto.com/files/uploadimg/20070420/200432139.jpg" width="98px" height="144px"/></a></dt>
+                <dd><h3><a href="http://book.51cto.com/art/200704/46270.htm" title="网管员必读—网络应用（第2版）">网管员必读—网络应用（第2版）</a></h3>
+                    本书虽然是《网管员必读—网络应用》的改版，但它绝不是简单的修改，而是完完全全的重写，内容更实用、更专业。全书共9章，13个大小方案，...
+                </dd>
+                
+            </dl>
+        </div>
+        <div></div>
+        <div class="dydy">
+            <dl>
+                <dt><img src="http://static1.51cto.com/51cto/cms/2016/images/dydy.jpg" alt=""></dt>
+                <dd>
+                    <h3>订阅51CTO邮刊</h3>
+                    <h4><a href="http://news.51cto.com/col/1323/">点击这里查看样刊</a></h4>
+                    <a href="http://home.51cto.com/index.php?s=/Subscribe"><img src="http://static4.51cto.com/51cto/cms/2016/images/ljdy.jpg" alt="订阅51CTO邮刊"></a>
+                </dd>
+            </dl>
+        </div>
+        <div></div>
+    </div>
+    <!-- 文章右侧结束 -->
+    </div>
+<div class="footer_nav">
+   <div class="wrap">
+       <h2>51CTO旗下网站：</h2>
+       <a href="http://www.51cto.com">领先的IT技术网站 51CTO</a>|<a href="http://cio.51cto.com">中国专业CIO网站 CIOage </a>|
+       <a href="http://www.hc3i.cn">中国数字医疗领军网站 HC3i</a>|<a href="http://zhijiapro.com/">区块链聚合媒体 zhijiapro</a>
+   </div>
+</div>
+<div id="ft"><div id="foot" align="center"><script src="http://www.51cto.com/images/copy_right/copy_right.js?v=0.4"></script></div></div>
+<div class="clk"><a class="ewm" href="###" target="_self"><img src="https://s5.51cto.com/wyfs02/M01/9B/36/wKiom1lfV4XgxZ3zAADAK8-_E6k046.jpg" style="display: none;"></a><a class="yjk" href="#comment" target="_self"></a><a class="topx" href="#topx" target="_self"></a></div>
+<script>
+    $(function(){
+        var host = window.location.host;
+        document.getElementById('cnxh').style.display = '';
+    });
+    var $$ = function(func){
+        if (document.addEventListener) {
+            window.addEventListener("load", func, false);
+        }
+        else if (document.attachEvent) {
+            window.attachEvent("onload", func);
+        }
+    };
+
+    $$(function(){
+        show();
+    });
+    var show = function(){
+        var aa = $('#cmscmt_iframe dl').html();
+        setTimeout(function(){
+            $("[data-track]").live("click", function() {
+                if (aa.indexOf('uid') > -1) {
+                    var label = $(this).data("track") + '-login';
+                } else {
+                    var label = $(this).data("track") + '-not-login';
+                }console.log(label);
+                window._hmt && window._hmt.push(['_trackEvent', label, 'click']);
+
+            });
+        }, 3000);
+    }
+
+</script>
+<script src="http://logs.51cto.com/rizhi/count/count.js"></script>
+
+<!-- 学院广告位 -->
+
+<!--<div id="edu_adver">-->
+    <!--<div class="aderbox">-->
+        <!--<span class="educlose">×</span>-->
+        <!--<a href="http://edu.51cto.com/activity/6.html?qd=CMSzuoce"><img src="https://s5.51cto.com/oss/201712/05/94601626f864124ca789425588a5a1f5.jpg" width="100" height="300" alt="51CTO学院双十二活动" title="51CTO学院双十二活动"></a>-->
+    <!--</div>-->
+<!--</div>-->
+<style type="text/css">
+    #edu_adver{position:fixed; top:240px; left:50%; margin-left:-623px; width:100px; height:300px; border:1px solid #c4c4c6;}
+    #edu_adver .aderbox{position:relative;}
+    #edu_adver  .educlose{position:absolute; right:6px; top:6px; background:#655c4d; color:#fff; font-size:12px;  display:inline-block; width:13px; height:13px; text-align:center; line-height:13px; cursor:pointer;}
+</style>
+<script>
+    $('#edu_adver .educlose').click(function () {
+        $("#edu_adver").hide();
+    });
+    var s=window.location.toString();
+    var s1=s.substr(7,s.length);
+    var s2=s1.indexOf(".");
+    s=s.substr(7,s2);
+    if(s=="stor"||s=="server"||s=="network"||s=="virtual"){
+        $("#edu_adver").hide();
+    }
+    if (s=="stor"||s=="server"||s=="network"||s=="virtual") {
+        $('.aderbox').find('a')[0].href = '';
+        $('.aderbox').find('img')[0].src = 'https://s2.51cto.com/oss/201711/01/507eecf589ca025c76a3aff2dfc1fcc4.jpg';
+    }
+</script>
+<!-- <script src="http://home.51cto.com/iframe/iframe-member-adv?www"></script> -->
+<!--数据统计-->
+<script>
+    //ParadigmSDKv3.init("dcde33d0dc6845609e9cb47f754d1094");
+    if(domain_prefix == 'developer') {
+        ParadigmSDKv3.trackDetailPageShow(346);
+    }else{
+        ParadigmSDKv3.trackDetailPageShow(269);
+    }
+</script>
+<script>
+    var host = window.location.host;
+    var domain_prefix = host.replace(/\.51cto\.com/, '');
+    var nowTime = new Date().getTime();
+    //get start time and end
+    var startTime1 = 0;
+    var endTime1 = 0;
+    var startTime2 = 0;
+    var endTime2 = 0;
+    var startTime3 = 0;
+    var endTime3 = 0;
+    var startTime4 = 0;
+    var endTime4 = 0;
+    var startTime5 = 0;
+    var endTime5 = 0;
+    var adContent = '';
+    if(domain_prefix == 'cloud'){
+        startTime1 = new Date('2018/08/31 00:00:00').getTime();
+        endTime1 = new Date('2018/08/31 23:59:59').getTime();
+
+        startTime2 = new Date('2018/09/05 00:00:00').getTime();
+        endTime2 = new Date('2018/09/07 23:59:59').getTime();
+
+        startTime3 = new Date('2018/09/12 00:00:00').getTime();
+        endTime3 = new Date('2018/09/13 23:59:59').getTime();
+
+        startTime4 = new Date('2018/09/19 00:00:00').getTime();
+        endTime4 = new Date('2018/09/20 23:59:59').getTime();
+
+        startTime5 = new Date('2018/09/25 00:00:00').getTime();
+        endTime5 = new Date('2018/09/26 23:59:59').getTime();
+        if((nowTime > startTime1 && nowTime < endTime1) || (nowTime > startTime2 && nowTime < endTime2) || (nowTime > startTime3 && nowTime < endTime3) || (nowTime > startTime4 && nowTime < endTime4) || (nowTime > startTime5 && nowTime < endTime5)){
+            adContent = "<iframe src=\"http://cloud.51cto.com/act/IBM/201808ad\" frameborder=\"0\" width=\"300px\" height=\"250px\" scrolling=\"no\"></iframe>";
+            changeAd();
+        }
+    }else if(domain_prefix == 'bigdata'){
+        startTime1 = new Date('2018/08/31 00:00:00').getTime();
+        endTime1 = new Date('2018/08/31 23:59:59').getTime();
+
+        startTime2 = new Date('2018/09/04 00:00:00').getTime();
+        endTime2 = new Date('2018/09/04 23:59:59').getTime();
+
+        startTime3 = new Date('2018/09/10 00:00:00').getTime();
+        endTime3 = new Date('2018/09/10 23:59:59').getTime();
+
+        startTime4 = new Date('2018/09/17 00:00:00').getTime();
+        endTime4 = new Date('2018/09/17 23:59:59').getTime();
+
+        startTime5 = new Date('2018/09/27 00:00:00').getTime();
+        endTime5 = new Date('2018/09/27 23:59:59').getTime();
+        if((nowTime > startTime1 && nowTime < endTime1) || (nowTime > startTime2 && nowTime < endTime2) || (nowTime > startTime3 && nowTime < endTime3) || (nowTime > startTime4 && nowTime < endTime4) || (nowTime > startTime5 && nowTime < endTime5)){
+            adContent = "<iframe src=\"http://cloud.51cto.com/act/IBM/201808ad2\" frameborder=\"0\" width=\"300px\" height=\"250px\" scrolling=\"no\"></iframe>";
+            changeAd();
+        }
+    }
+    function changeAd(){
+        //add new
+        $("div.mtgg").after(adContent);
+        //move some block to left
+        var adBox = $("div.mtgg");
+        $(".zwnr p:first").before(adBox);
+        $("div.mtgg").css('margin-top', '7px');
+        $("div.mtgg").css('margin-right', '10px');
+
+    }
+</script>
+<script type="text/javascript">var artid = 433874</script>
+<script src='http://home.51cto.com/index.php?s=/Index/getLoginStatus2015/reback/http%253A%252F%252Fdeveloper.51cto.com%252Fart%252F201403%252F433874.htm' charset="utf-8"></script>
+<script type="text/javascript" src="http://static4.51cto.com/51cto/cms/2016/js/article.js?v=1.0"></script>
+<script type="text/javascript" src="http://static5.51cto.com/51cto/cms/2016/js/article_ajax.js?v=2.1"></script>
+<script src="http://other.51cto.com/php/count.php?view=yes&artID=433874" type="text/javascript"></script>
+<script type="text/javascript" src="http://home.51cto.com/apps/favorite/Tpl/default/Public/js/favorbox.js"></script>
+<!--  一大波JS来袭 -->
+<div id="MyMoveAd" style="display:none">
+    <span id="pinglun"><script type="text/javascript" src="http://other.51cto.com/php/getArtCount.php?artid=433874&type=all"></script></span>
+	<span id="tonglan"><script type="text/javascript" src="http://image.51cto.com/ad/art/tonglan/ad.js"></script></span>
+	<span id="wordlink_1"><script src="http://image.51cto.com/ad/art/wordlink/wordlink1.js"></script></span>
+	<span id="wordlink_2"><script src="http://image.51cto.com/ad/art/wordlink/wordlink2.js"></script></span>
+	<span id="wordlink_3"><script src="http://image.51cto.com/ad/art/wordlink/wordlink3.js"></script></span>
+	<span id="wordlink_4"><script src="http://image.51cto.com/ad/art/wordlink/wordlink4.js"></script></span>
+	<span id="wordlink"><script  src="http://image.51cto.com/ad/art/wordlink/ad.js"></script></span>
+</div>
+<script type="text/javascript">
+var thistid=433874;
+//收藏按钮
+var favor_url = 'http://developer.51cto.com/art/201403/433874.htm';
+var favor_title = '坐在马桶上看算法：只有五行的Floyd最短路算法';  
+document.getElementById('tonglanad').innerHTML=document.getElementById('tonglan').innerHTML;
+</script>
+<!-- 结束 -->
+</body>
+</html>
