@@ -45,7 +45,7 @@ int singleNumber2(vector<int>& nums) {
 	return singleNum;
 }
 
-int main()
+int main_136()
 {
 	vector<int> v = { 2, 2, 1, 1, 3 };
 	int res = singleNumber2(v);
