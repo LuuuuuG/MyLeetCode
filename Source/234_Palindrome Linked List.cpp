@@ -62,7 +62,7 @@ h			                     s
 1 -> 1    null <- 2 <- 1
 		h              s
 */
-ListNode* reverseList(ListNode *head);
+ListNode* reverseList234(ListNode *head);
 bool isPalindrome2(ListNode* head) {
 	ListNode *fast = head, *slow = head;
 	while (fast != NULL && fast->next != NULL)
@@ -72,7 +72,7 @@ bool isPalindrome2(ListNode* head) {
 	}
 	if (fast != NULL)
 		slow = slow->next; //let right half smaller.
-	slow = reverseList(slow);
+	slow = reverseList234(slow);
 	while (slow != NULL)
 	{
 		if (head->val != slow->val)
@@ -82,7 +82,7 @@ bool isPalindrome2(ListNode* head) {
 	}
 	return true;
 }
-ListNode* reverseList(ListNode *head)
+ListNode* reverseList234(ListNode *head)
 {
 	ListNode *prev = NULL;
 	ListNode *next = NULL;
