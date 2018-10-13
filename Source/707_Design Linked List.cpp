@@ -136,7 +136,7 @@ public:
 * obj.deleteAtIndex(index);
 */
 
-int main()
+int main_707()
 {
 	MyLinkedList* ml = new MyLinkedList();
 	ml->addAtHead(1);
