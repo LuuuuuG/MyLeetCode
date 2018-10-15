@@ -30,7 +30,7 @@ int getSum(int a, int b) {
 	return a;
 }
 
-int main()
+int main_371()
 {
 	int res = getSum(-2, 3);
 	cout << res << endl;
