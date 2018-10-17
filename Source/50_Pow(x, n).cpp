@@ -65,7 +65,7 @@ double myPow3(double x, int n) {
 }
 int main_50()
 {
-	double res = myPow2();
+	double res = myPow2(2, -2);
 	cout << res << endl;
 	system("pause");
 	return 0;
