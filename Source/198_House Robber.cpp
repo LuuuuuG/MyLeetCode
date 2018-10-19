@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <vector>
 #include <algorithm>
 using namespace std;
@@ -42,6 +42,35 @@ int rob(vector<int> num) {
 	}
 
 	return max(a, b);
+}
+
+/*-----------------------------------------
+DP solution:
+M(k) = money at the kth house
+P(0) = 0
+P(1) = M(1)
+P(k) = max(P(k−2) + M(k), P(k−1))
+-----------------------------------------*/
+int rob2(vector<int>& nums) {
+	int n = nums.size();
+	if (!n){
+		return 0;
+	}
+	if (n == 1){
+		return nums[0];
+	}
+
+	if (n == 2){
+		return max(nums[0], nums[1]);
+	}
+
+	vector<int> dp(n, 0);
+	dp[0] = nums[0];
+	dp[1] = max(nums[1], dp[0]);
+	for (int i = 2; i<n; i++){
+		dp[i] += max(dp[i - 2] + nums[i], dp[i - 1]);
+	}
+	return dp[n - 1];
 }
 
 int main_198()
