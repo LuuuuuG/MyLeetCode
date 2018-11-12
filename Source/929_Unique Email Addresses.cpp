@@ -36,39 +36,80 @@ Each emails[i] contains exactly one '@' character.
 
 929. Unique Email Addresses: https://leetcode.com/problems/unique-email-addresses/description/
 */
-
-//32ms solution:
-string emailHelper(string email)
-{
-	string res;
-	bool skip_all = true;
-	bool skip_plus = false;
-	for (auto i : email)
+class Solution{
+	//32ms solution:
+	string emailHelper(string email)
 	{
-		if (i == '@')
+		string res;
+		bool skip_all = true;
+		bool skip_plus = false;
+		for (auto i : email)
 		{
-			skip_all = false;
-			skip_plus = false;
+			if (i == '@')
+			{
+				skip_all = false;
+				skip_plus = false;
+			}
+			if (i == '+')
+			{
+				skip_plus = true;
+			}
+			if ((i == '.' || skip_plus) && skip_all)
+				continue;
+			else
+				res.push_back(i);
 		}
-		if (i == '+')
-		{
-			skip_plus = true;
-		}
-		if ((i == '.' || skip_plus) && skip_all)
-			continue;
-		else
-			res.push_back(i);
+		return res;
 	}
-	return res;
-}
 
-int numUniqueEmails(vector<string>& emails) {
-	set<string> s;
-	for (auto i : emails)
-		s.insert(emailHelper(i));
-	return s.size();
-}
+	int numUniqueEmails(vector<string>& emails) {
+		set<string> s;
+		for (auto i : emails)
+			s.insert(emailHelper(i));
+		return s.size();
+	}
+};
 
+class Solution2{
+	int numUniqueEmails1(vector<string>& emails) {
+		//process strings and insert them into a set, then return the size of the set
+
+		if (emails.empty()) {
+			return 0;
+		}
+
+		unordered_set<string> S;
+		//for each email address, build a processed string
+		for (string& str : emails) {
+			int i = 0;
+			bool domain = false;
+			string buffer = "";
+			// check each character in email address
+			while (i < str.length()){
+				// if it's '+', go until '@'
+				if (!domain && str[i] == '+') {
+					while (str[i] != '@') {
+						i++;
+					}
+				}
+
+				// if it's '@', it's domain
+				if (str[i] == '@') {
+					domain = true;
+				}
+
+				// if it's not domain, ignore '.'
+				if (domain || str[i] != '.') {
+					buffer += str[i];
+				}
+				i++;
+			}
+			// insert to the set
+			S.insert(buffer);
+		}
+		return S.size();
+	}
+};
 
 int main_929()
 {
