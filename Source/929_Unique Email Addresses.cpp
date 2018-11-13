@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <set>
+#include <unordered_set>
 using namespace std;
 
 /*
@@ -71,7 +72,8 @@ class Solution{
 };
 
 class Solution2{
-	int numUniqueEmails1(vector<string>& emails) {
+public:
+	static int numUniqueEmails(vector<string>& emails) {
 		//process strings and insert them into a set, then return the size of the set
 
 		if (emails.empty()) {
@@ -114,7 +116,7 @@ class Solution2{
 int main_929()
 {
 	vector<string> emails{ "test.email+alex@leetcode.com", "test.e.mail+bob.cathy@leetcode.com", "testemail+david@lee.tcode.com" };
-	int res = numUniqueEmails(emails);
+	int res = Solution2::numUniqueEmails(emails);
 	cout << res << endl;
 
 	system("pause");
