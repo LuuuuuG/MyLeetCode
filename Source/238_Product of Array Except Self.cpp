@@ -26,7 +26,7 @@ vector<int> productExceptSelf(vector<int>& nums) {
 		left *= nums[i];
 	}
 	int right = 1;
-	for (int j = nums.size() - 1; j >= 0; --i)
+	for (int j = nums.size() - 1; j >= 0; --j)
 	{
 		res[j] *= right;
 		right *= nums[j];
