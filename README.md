@@ -35,7 +35,7 @@
   
 * Tree
   
-  [#100 Middle of the Linked List    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/100_Same%20Tree.cpp)
+  [#100 Same Tree](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/100_Same%20Tree.cpp)
   
   [#101 Symmetric Tree    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/101_Symmetric%20Tree.cpp)
   
