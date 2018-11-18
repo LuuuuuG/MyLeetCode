@@ -44,3 +44,29 @@ public:
 		return dummy.next;
 	}
 };
+
+//8ms recursion solution.
+class Solution2 {
+public:
+	ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+		if (l1 && l2) {
+			if (l1->val <= l2->val) {
+				ListNode* result = l1;
+				result->next = mergeTwoLists(l1->next, l2);
+				return result;
+			}
+			else {
+				ListNode* result = l2;
+				result->next = mergeTwoLists(l1, l2->next);
+				return result;
+			}
+		}
+		if (l1) {
+			return l1;
+		}
+		if (l2) {
+			return l2;
+		}
+		return NULL;
+	}
+};
