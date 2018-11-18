@@ -15,11 +15,11 @@
   
   [#21 Merge Two Sorted Lists ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/21_Merge%20Two%20Sorted%20Lists.cpp)
   
-  [#83 Remove Duplicates from Sorted List    ]
+  [#83 Remove Duplicates from Sorted List    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/83_Remove%20Duplicates%20from%20Sorted%20List.cpp)
   
   [#141 Linked List Cycle    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/141_Linked%20List%20Cycle.cpp)
   
-  [#160 Intersection of Two Linked Lists    ]
+  [#160 Intersection of Two Linked Lists    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/160_Intersection%20of%20Two%20Linked%20Lists.cpp)
   
   [#203 Remove Linked List Elements    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/203_Remove%20Linked%20List%20Elements.cpp)
   
@@ -27,7 +27,7 @@
   
   [#234 Palindrome Linked List    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/234_Palindrome%20Linked%20List.cpp)
   
-  [#237 Delete Node in a Linked List    ]
+  [#237 Delete Node in a Linked List    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/237_Delete%20Node%20in%20a%20Linked%20List.cpp)
   
   [#707 Design Linked List    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/707_Design%20Linked%20List.cpp)
   
