@@ -85,7 +85,7 @@
   
   [#707 Design Linked List    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/707_Design%20Linked%20List.cpp)
   
-  [#876 Middle of the Linked List    ]
+  [#876 Middle of the Linked List    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/876_Middle%20of%20the%20Linked%20List.cpp)
   
 * Tree
   
