@@ -13,7 +13,7 @@
   
   [#26 Remove Duplicates from Sorted Array    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/26_Remove_dup_from_sroted_arr.cpp)
   
-  [#27 Remove Element    ]
+  [#27 Remove Element    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/27_Remove%20Element.cpp)
   
   [#35 Search Insert Position  ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/35_Search_Insert_Position.cpp)
   
