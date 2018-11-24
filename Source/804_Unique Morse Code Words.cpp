@@ -2,6 +2,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <set>
 using namespace std;
 
 /*
@@ -30,14 +31,26 @@ There are 2 different transformations, "--...-." and "--...--.".
 804. Unique Morse Code Words: https://leetcode.com/problems/unique-morse-code-words/description/
 */
 
+
 int uniqueMorseRepresentations(vector<string>& words) {
 	vector<string> Morse = { ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.." };
-
+	set<string> s;
+	for (auto word : words)
+	{
+		string code = "";
+		for (auto ch : word)
+			code+=(Morse[ch - 'a']);
+		s.insert(code);
+	}
+	return s.size();
 }
+
 
 int main_804()
 {
-
+	vector<string> words = { "gin", "zen", "gig", "msg" };
+	int res = uniqueMorseRepresentations(words);
+	cout << res << endl;
 	system("pause");
 	return 0;
 }
