@@ -74,7 +74,7 @@ bool isMonotonic2(vector<int>& A) {
 }
 
 //STL is_sorted
-bool isMonotonic(vector<int>& A){
+bool isMonotonic3(vector<int>& A){
 	return is_sorted(A.cbegin(), A.cend()) || is_sorted(A.crbegin(), A.crend());
 }
 //Two pass
