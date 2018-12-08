@@ -26,24 +26,33 @@ Output: False
 
 bool detectCapitalUse(string word) {
 	if (word.size() == 0) return false;
-	bool start_upper = false;
-	bool start_lower = false;
-	if (word[0] > 'A' && word[0] < 'Z') start_upper = true;
-	if (word[0] > 'a' && word[0] < 'z') start_lower = true;
+
+	bool has_upper = false, has_lower = false;
 
 	for (int i = 1; i < word.size(); ++i)
 	{
-		//todo: 
-		//ok for:
-		//1.upper + all  upper 
-		//2. upper + all  lower
-		//3. lower + all lower
+		if (isupper(word[i])) has_upper = true;
+		if (islower(word[i])) has_lower = true;
 	}
+	if (islower(word[0]) && has_upper) return false;
+	if (isupper(word[0]) && has_upper && has_lower) return false;
+
+	return true;
 }
 
-int main()
-{
+bool detectCapitalUse2(string word) {
+	for (int i = 1; i < word.size(); i++){
+		if (isupper(word[1]) != isupper(word[i]) ||
+			islower(word[0]) && isupper(word[i])) return false;
+	}
+	return true;
+}
 
+int main_520()
+{
+	string word = "aeafweA";
+	bool res = detectCapitalUse(word);
+	cout << boolalpha << res << endl;
 	system("pause");
 	return 0;
 }
