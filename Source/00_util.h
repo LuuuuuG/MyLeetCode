@@ -27,11 +27,11 @@ struct TreeNode {
 
 /*--------------------------------tools-------------------------------*/
 //vector
-//template <typename T>
-//void VectorPrint(vector<T> &vec);
-//
-//template <typename T>
-//void Vector2DPrint(vector<vector<T> > &vec);
+template <typename T>
+void VectorPrint(const vector<T> &vec);
+
+template <typename T>
+void Vector2DPrint(const vector<vector<T> > &vec);
 
 //List
 ListNode *ListCreate(int count, ...);
