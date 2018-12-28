@@ -1,17 +1,17 @@
 #include "00_util.h"
 
 //vector:
-#if 0
+#if 1
 template<typename T>
-void VectorPrint(vector<T> &vec)
+void VectorPrint(const vector<T> &vec)
 {
 	for (auto i : vec)
-		cout << i << " , ";
+		cout << i << "  ";
 	cout << endl;
 }
 
 template<typename T>
-void Vector2DPrint(vector<vector<T> > &vec)
+void Vector2DPrint(const vector<vector<T> > &vec)
 {
 	printf("[\n");
 	for (size_t i = 0; i < vec.size(); i++)

@@ -6,7 +6,37 @@
 
   [#3 Longest Substring Without Repeating Characters](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/03_Longest%20Substring%20Without%20Repeating%20Characters.cpp)
   
+  [#13	Roman to Integer    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/13_RomanToInteger.cpp)
+  
+  [#14	Longest Common Prefix    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/14_Longest_Common_Prefix.cpp)
+  
+  [#20	Valid Parentheses    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/20_Vaild_Parentheses.cpp)
+  
+  [#28	Implement strStr()    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/28_Implement_strStr.cpp)
+  
+  [#38	Count and Say    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/38_Count_and_Say.cpp)
+  
+  [#58	Length of Last Word    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/58_Length_of_Last_Word.cpp)
+  
+  [#67	Add Binary    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/67_Add%20Binary.cpp)
+  
+  [#125	Valid Palindrome    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/125_Vaild_Palindrome.cpp)
+  
+  [#344	Reverse String    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/344_Reverse_String.cpp)
+  
+  [#345	Reverse Vowels of a String   ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/345_Reverse%20Vowels%20of%20a%20String.cpp)
+  
+  [#387	First Unique Character in a String    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/387_First%20Unique%20Character%20in%20a%20String.cpp)
+  
+  [#520	Detect Capital    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/520_Detect%20Capital.cpp)
+  
+  [#541	Reverse String II    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/541_Reverse_String_II.cpp)
 
+  [#551	Student Attendance Record I    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/551_Student%20Attendance%20Record%20I.cpp)
+  
+  [#557	Reverse Words in a String III    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/557_Reverse_Words_in_String_III.cpp)
+    
+  
 * Array
 
   [#1 Two Sum    ](https://github.com/LuuuuuG/MyLeetCode/blob/master/Source/01_Two%20Sum.cpp)

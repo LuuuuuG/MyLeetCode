@@ -25,8 +25,8 @@ string addBinary(string a, string b) {
 	int c = 0, i = a.size() - 1, j = b.size() - 1;
 	while (i >= 0 || j >= 0 || c == 1)
 	{
-		c += i >= 0 ? a[i--] - '0' : 0;
-		c += j >= 0 ? a[j--] - '0' : 0;
+		c += i >= 0 ? a[i--] - '0' : 0;	//if(i >= 0) c += a[i--] - '0';
+		c += j >= 0 ? b[j--] - '0' : 0; //if(j >= 0) c += b[j--] - '0';
 		res = to_string(c % 2) + res;
 		c /= 2;
 	}

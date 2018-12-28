@@ -72,6 +72,15 @@ public:
 		return ans;
 	}
 };
+
+template<typename T>
+void myVectorPrint(const vector<T> &vec)
+{
+	for (auto i : vec)
+		cout << i << " ";
+	cout << endl;
+}
+
 int main_107()
 {
 	vector<int> v = { 1, 1, 2, 3, 5, 8 };
