@@ -145,6 +145,32 @@ public:
 
 };
 
+class Solution3 {
+public:
+	TreeNode* nroot = new TreeNode(0);
+	TreeNode* prev = nroot;
+	TreeNode* increasingBST(TreeNode* root) {
+
+		helper(root);
+		return nroot->right;
+	}
+
+	void helper(TreeNode* root)
+	{
+
+		if (root == NULL)
+			return;
+
+		helper(root->left);
+		prev->right = root;
+		prev = root;
+		prev->left = NULL;
+		helper(root->right);
+
+	}
+
+};
+
 int main_897()
 {
 
