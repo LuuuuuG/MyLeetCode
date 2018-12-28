@@ -101,7 +101,7 @@ void SubTreePrint(TreeNode *node, int level)
 	SubTreePrint(node->right, level + 1);
 	for (int i = 0; i < level; i++)
 		printf("    ");
-	printf("%02d\n", node->val);
+	printf("%4d\n", node->val);
 	SubTreePrint(node->left, level + 1);
 }
 
