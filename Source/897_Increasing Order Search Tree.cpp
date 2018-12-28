@@ -43,6 +43,7 @@ Note:
 The number of nodes in the given tree will be between 1 and 100.
 Each node will have a unique integer value from 0 to 1000.
 
+897. Increasing Order Search Tree: https://leetcode.com/problems/increasing-order-search-tree/description/
 */
 
 #if 0
@@ -108,6 +109,41 @@ TreeNode* increasingBST(TreeNode* root, TreeNode* tail = NULL) {
 	root->right = increasingBST(root->right, tail);
 	return res;
 }
+
+class Solution {
+	TreeNode *hd = new TreeNode(0);
+	TreeNode *p = hd;
+public:
+	TreeNode* increasingBST(TreeNode* root) {
+		if (!root)   return nullptr;
+		increasingBST(root->left);
+		p->right = new TreeNode(root->val);
+		p = p->right;
+		increasingBST(root->right);
+		return hd->right;
+	}
+};
+
+class Solution2 {
+public:
+	TreeNode* increasingBST(TreeNode* root) {
+		TreeNode dummy = TreeNode(0);
+		TreeNode* pre = &dummy;
+		DFSHelper(root, pre);
+		return dummy.right;
+	}
+	void DFSHelper(TreeNode* root, TreeNode*& pre) {
+		if (!root) {
+			return;
+		}
+		DFSHelper(root->left, pre);
+		pre->right = root;
+		root->left = NULL;
+		pre = root;
+		DFSHelper(root->right, pre);
+	}
+
+};
 
 int main_897()
 {
