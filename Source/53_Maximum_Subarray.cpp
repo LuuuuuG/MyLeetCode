@@ -35,6 +35,7 @@ int maxSubArray_dp(vector<int>& nums) {
 
 	for (int i = 1; i < nums.size(); ++i)
 	{
+		//dp[i] = max(nums[i],dp[i-1]+nums[i]);
 		dp[i] = nums[i] + (dp[i - 1] > 0 ? dp[i - 1] : 0);
 		ans = max(ans, dp[i]);
 	}
