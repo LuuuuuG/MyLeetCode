@@ -26,6 +26,21 @@ int maxSubArray(vector<int>& nums) {
 	return ans;
 }
 
+//DP solution:
+//maxSubArray(A, i) = A[i] + maxSubArray(A, i - 1) > 0 ? maxSubArray(A, i - 1) : 0;
+int maxSubArray_dp(vector<int>& nums) {
+	vector<int> dp(nums.size());
+	dp[0] = nums[0];
+	int ans = dp[0];
+
+	for (int i = 1; i < nums.size(); ++i)
+	{
+		dp[i] = nums[i] + (dp[i - 1] > 0 ? dp[i - 1] : 0);
+		ans = max(ans, dp[i]);
+	}
+	return ans;
+}
+
 /*
 Problem Description:
 Given a sequence a[1],a[2],a[3]......a[n], your job is to calculate the max sum of a sub-sequence. For example, given (6,-1,5,4,-7), the max sum in this sequence is 6 + (-1) + 5 + 4 = 14.
@@ -86,7 +101,7 @@ void maxSubArray2(void)
 int main_53()
 {
 	vector<int> v = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
-	int res = maxSubArray(v);
+	int res = maxSubArray_dp(v);
 	cout << " sum = " << res << endl;
 
 	//DP test 2.
