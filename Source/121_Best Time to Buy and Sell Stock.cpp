@@ -46,10 +46,26 @@ int maxProfit2(vector<int> &prices) {
 	return maxPro;
 }
 
+//DP solution:
+int maxProfit_dp(vector<int>& prices) {
+	int days = prices.size();
+	if (days == 0) return 0;
+	//int dp[days];
+	vector<int> dp(days);
+	dp[0] = 0;
+	int minPrice = prices[0];
+	for (int i = 1; i < days; ++i)
+	{
+		minPrice = min(prices[i], minPrice);
+		dp[i] = max(dp[i - 1], prices[i] - minPrice);
+	}
+	return dp[days - 1];
+}
+
 int main_121()
 {
 	vector<int> v = { 7, 1, 5, 3, 6, 4 };
-	int res = maxProfit(v);
+	int res = maxProfit_dp(v);
 	cout << "res = " << res << endl;
 
 	system("pause");
