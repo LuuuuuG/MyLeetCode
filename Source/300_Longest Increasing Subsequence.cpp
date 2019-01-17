@@ -68,10 +68,58 @@ int lengthOfLIS2(vector<int>& nums) {
 	return res;
 }
 
+//lower_bound
+int lengthOfLIS3(vector<int>& nums) {
+	vector<int> result;
+
+	for (auto x : nums)
+	{
+		auto iter = lower_bound(result.begin(), result.end(), x);
+		
+		if (iter == result.end())
+			result.push_back(x);
+		else
+			*iter = x;
+	}
+
+	return result.size();
+}
+
+void test_lower_bound()
+{
+	vector<int> v{ 1,3,1,3,5,8,7,9 };
+	//auto it = lower_bound(v.begin(), v.end(), 2) - v.begin();//1
+	 auto it = lower_bound(v.begin(), v.end(), 3) - v.begin();//3
+	 it = lower_bound(v.begin(), v.end(), 1) - v.begin();//2
+	 it = lower_bound(v.begin(), v.end(), 4) - v.begin();//4
+	 it = lower_bound(v.begin(), v.end(), 6) - v.begin();//5
+	cout << "\n------------------------------------------\n" << endl;
+	
+	 it = upper_bound(v.begin(), v.end(), 10) - v.begin();//8
+	 it = upper_bound(v.begin(), v.end(), 6) - v.begin();//5
+	 it = upper_bound(v.begin(), v.end(), 3) - v.begin();//4
+
+
+	 int myints[] = { 10,20,30,30,20,10,10,20 };
+	 std::vector<int> vec(myints, myints + 8);           // 10 20 30 30 20 10 10 20
+
+	 std::sort(vec.begin(), vec.end());                // 10 10 10 20 20 20 30 30
+
+	 std::vector<int>::iterator low, up;
+	 low = std::lower_bound(vec.begin(), vec.end(), 20); //  first  >= 20
+	 up = std::upper_bound(vec.begin(), vec.end(), 20); //       first > 20
+
+	 std::cout << "lower_bound at position " << (low - vec.begin()) << '\n';//3
+	 std::cout << "upper_bound at position " << (up - vec.begin()) << '\n';//6
+
+}
+
 int main_300()
 {
 	vector<int> v{ 10,9,2,5,3,7,101,18 };
-	int res = lengthOfLIS2(v);
+
+	test_lower_bound();
+	int res = lengthOfLIS3(v);
 	cout << res << endl;
 	system("pause");
 	return 0;
