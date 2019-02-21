@@ -50,26 +50,27 @@ Explanation: The number "-91283472332" is out of the range of a 32-bit signed in
 */
 
 int myAtoi(string str) {
-	long result = 0;
+	long long result = 0;
 	int indicator = 1;
-	for (int i = 0; i < str.size();)
+
+	int i = str.find_first_not_of(' ');
+	if (i < 0) return 0;
+	if (str[i] == '-' || str[i] == '+')
+		indicator = (str[i++] == '-') ? -1 : 1;
+	while ('0' <= str[i] && str[i] <= '9')
 	{
-		i = str.find_first_not_of(' ');
-		if (str[i] == '-' || str[i] == '+')
-			indicator = (str[i++] == '-') ? -1 : 1;
-		while ('0' <= str[i] && str[i] <= '9')
-		{
-			result = result * 10 + (str[i++] - '0');
-			if (result*indicator >= INT_MAX) return INT_MAX;
-			if (result*indicator <= INT_MIN) return INT_MIN;
-		}
-		return result * indicator;
+		result = result * 10 + (str[i++] - '0');
+		if (result*indicator >= INT_MAX) return INT_MAX;
+		if (result*indicator <= INT_MIN) return INT_MIN;
+		
 	}
+	return result * indicator;
 }
 
 int main_08()
 {
-	string s = "+-2016";
+	string s = "                 ";//empty return 0
+	//string s = "2147483648";//overflow return INT_MAX
 	int res = myAtoi(s);
 	cout << res << endl;
 	system("pause");
