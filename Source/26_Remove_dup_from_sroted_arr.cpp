@@ -60,6 +60,21 @@ int removeDuplicates(vector<int>& nums)
 
 }
 
+int removeDuplicates2(vector<int>& nums)
+{
+	if (nums.size() == 0) return 0;
+	int i = 0;
+	int j = 0;
+	while (j < nums.size())
+	{
+		if (nums[i] == nums[j])
+			++j;
+		else
+			nums[++i] = nums[j];// from index 1 to do replace.
+	}
+	return i + 1; // add index 0.
+}
+
 int removeElement(vector<int>& nums, int val) {
 	int i = 0;
 	for (int n : nums)
@@ -73,7 +88,7 @@ int main_26_27()
 {
 	vector<int> v = { 1, 2, 2, 3, 4, 4, 5, 5, 8 };
 
-	int res = removeDuplicates(v);
+	int res = removeDuplicates2(v);
 	//int res = removeElement(v, 2);
 
 	cout << "length = " << res << endl;
