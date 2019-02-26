@@ -50,7 +50,7 @@ It doesn't matter what values are set beyond the returned length.
 ATTENTION!!!¡¾It doesn't matter what values are set beyond the returned length.¡¿@_@
 */
 
-int removeDuplicates(vector<int>& nums)
+int removeDuplicates_(vector<int>& nums)
 {
 	int i = 0;
 	for (int n : nums)
