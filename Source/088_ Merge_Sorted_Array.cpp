@@ -45,12 +45,7 @@ void merge2(vector<int>& nums1, int m, vector<int>& nums2, int n) {
 		nums1[--l] = nums2[--n];
 	}
 }
-//amazing:
-void merge3(vector<int>& A, int m, vector<int>& B, int n)
-{
-	while (n>0)
-		A[m + n - 1] = (m == 0 || B[n - 1] > A[m - 1]) ? B[--n] : A[--m];
-}
+
 
 int main_88()
 {
@@ -58,7 +53,7 @@ int main_88()
 	vector<int>	nums2 = { 2, 5, 6 };
 	int m = 3, n = 3;
 
-	merge(nums1, m, nums2, n);
+	merge2(nums1, m, nums2, n);
 
 	for (auto i : nums1)
 		cout << i << " ";
