@@ -11,17 +11,17 @@ void VectorPrint(const vector<T> &vec)
 }
 
 template<typename T>
-void Vector2DPrint(const vector<vector<T> > &vec)
+void Vector2DPrint( vector<vector<T> > &vec)
 {
-	printf("[\n");
-	for (size_t i = 0; i < vec.size(); i++)
+	cout << "[" << endl;;
+	for (auto vecs : vec)
 	{
-		printf("[ ");
-		for (size_t j = 0; j < vec[i].size(); j++)
-			cout << vec[i][j] << ", ";
-		printf(" ]\n");
+		cout << "[ ";
+		for (auto i : vecs)
+			cout << i << ", ";
+		cout << " ]" << endl;
 	}
-	printf("]\n");
+	cout << "]" << endl;
 }
 #endif
 
