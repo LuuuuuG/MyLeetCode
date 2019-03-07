@@ -29,7 +29,7 @@ void subsets(vector<int>& nums, int start, vector<int>& sub, vector<vector<int> 
 	res.push_back(sub);
 	for (int i = start; i < nums.size(); ++i)
 	{
-		if (i > start && nums[i] == nums[i - 1]) continue;
+		if (i > start && nums[i] == nums[i - 1]) continue;//skip duplicates
 		sub.push_back(nums[i]);
 		subsets(nums, i + 1, sub, res);
 		sub.pop_back();
