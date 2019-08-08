@@ -158,3 +158,4 @@ $RECYCLE.BIN/
 # Mac desktop service store files
 .DS_Store
 MyLeetCode.VC.db
+MyLeetCode.VC.VC.opendb

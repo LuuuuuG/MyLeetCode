@@ -24,7 +24,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -41,6 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>.;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -112,7 +113,6 @@
     <ClCompile Include="088_ Merge_Sorted_Array.cpp" />
     <ClCompile Include="090_Subsets II.cpp" />
     <ClCompile Include="092_Reverse Linked List II.cpp" />
-    <ClCompile Include="09_Palindrome_Number.cpp" />
     <ClCompile Include="100_Same Tree.cpp" />
     <ClCompile Include="101_Symmetric Tree.cpp" />
     <ClCompile Include="104_Maximum Depth of Binary Tree.cpp" />
@@ -128,7 +128,6 @@
     <ClCompile Include="122_Best Time to Buy and Sell Stock II.cpp" />
     <ClCompile Include="125_Vaild_Palindrome.cpp" />
     <ClCompile Include="136_Single Number.cpp" />
-    <ClCompile Include="13_RomanToInteger.cpp" />
     <ClCompile Include="141_Linked List Cycle.cpp" />
     <ClCompile Include="148_Sort List.cpp" />
     <ClCompile Include="151_Reverse Words in a String.cpp" />
@@ -146,7 +145,6 @@
     <ClCompile Include="198_House Robber.cpp" />
     <ClCompile Include="203_Remove Linked List Elements.cpp" />
     <ClCompile Include="206_Reverse Linked List.cpp" />
-    <ClCompile Include="20_Vaild_Parentheses.cpp" />
     <ClCompile Include="215_Kth Largest Element in an Array.cpp" />
     <ClCompile Include="216_Combination Sum III.cpp" />
     <ClCompile Include="217_Contains Duplicate.cpp" />
@@ -162,7 +160,6 @@
     <ClCompile Include="257_Binary Tree Paths.cpp" />
     <ClCompile Include="258_Add Digits.cpp" />
     <ClCompile Include="268_Missing Number.cpp" />
-    <ClCompile Include="26_Remove_dup_from_sroted_arr.cpp" />
     <ClCompile Include="283_Move Zeroes.cpp" />
     <ClCompile Include="300_Longest Increasing Subsequence.cpp" />
     <ClCompile Include="326_Power of Three.cpp" />
@@ -218,8 +215,6 @@
     <ClCompile Include="922_Sort Array By Parity II.cpp" />
     <ClCompile Include="929_Unique Email Addresses.cpp" />
     <ClCompile Include="937_Reorder Log Files.cpp" />
-    <ClCompile Include="NG_58_Length_of_Last_Word.cpp" />
-    <ClCompile Include="NG_53_Maximum_Subarray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="000_util.h" />

@@ -34,22 +34,33 @@ You need to reduce multiple spaces between two words to a single space in the re
 
 151. Reverse Words in a String: https://leetcode.com/problems/reverse-words-in-a-string/
 */
+namespace {
+	string reverseWords(string s) {
 
-string reverseWords(string s) {
-
-	reverse(s.begin(), s.end());//reverse whole words.
-	int i = 0, j = 0;
-	while (i < s.size())
-	{
-		while (i < s.size() && s[i] == ' ')
-			++i;//i is the start of the word
-		if (i < s.size() && j > 0)
-			s[j++] = ' ';
-		int start = j;
-		while (i < s.size() && s[i] != ' ')
-			s[j++] = s[i++];
-		reverse(s.begin() + start, s.begin() + j);//reverse single word.
+		reverse(s.begin(), s.end());//reverse whole words.
+		int i = 0, j = 0;
+		while (i < s.size())
+		{
+			while (i < s.size() && s[i] == ' ')
+				++i;//i is the start of the word
+			if (i < s.size() && j > 0)
+				s[j++] = ' ';
+			int start = j;
+			while (i < s.size() && s[i] != ' ')
+				s[j++] = s[i++];
+			reverse(s.begin() + start, s.begin() + j);//reverse single word.
+		}
+		s.resize(j);//clean extra chars.
+		return s;
 	}
-	s.resize(j);//clean extra chars.
-	return s;
+}
+int main_151()
+{
+	string s = "hello world!";
+	
+	string res = reverseWords(s);
+	cout << res << endl;
+
+	system("pause");
+	return 0;
 }
