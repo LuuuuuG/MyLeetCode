@@ -18,7 +18,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -115,6 +115,7 @@
     <ClCompile Include="092_Reverse Linked List II.cpp" />
     <ClCompile Include="100_Same Tree.cpp" />
     <ClCompile Include="101_Symmetric Tree.cpp" />
+    <ClCompile Include="102_Binary Tree Level Order Traversal.cpp" />
     <ClCompile Include="104_Maximum Depth of Binary Tree.cpp" />
     <ClCompile Include="107_Binary Tree Level Order Traversal II.cpp" />
     <ClCompile Include="108_Convert Sorted Array to Binary Search Tree.cpp" />
