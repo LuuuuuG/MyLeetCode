@@ -116,6 +116,7 @@
     <ClCompile Include="100_Same Tree.cpp" />
     <ClCompile Include="101_Symmetric Tree.cpp" />
     <ClCompile Include="102_Binary Tree Level Order Traversal.cpp" />
+    <ClCompile Include="103_Binary Tree Zigzag Level Order Traversal.cpp" />
     <ClCompile Include="104_Maximum Depth of Binary Tree.cpp" />
     <ClCompile Include="107_Binary Tree Level Order Traversal II.cpp" />
     <ClCompile Include="108_Convert Sorted Array to Binary Search Tree.cpp" />

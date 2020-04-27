@@ -471,6 +471,9 @@
     <ClCompile Include="102_Binary Tree Level Order Traversal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="103_Binary Tree Zigzag Level Order Traversal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="000_util.h">
