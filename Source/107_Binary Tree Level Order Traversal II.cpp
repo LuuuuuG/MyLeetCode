@@ -1,6 +1,7 @@
-#include "000_util.h"
 #include <iostream>
 #include <algorithm>
+#include <queue>
+#include "000_util.h"
 using namespace std;
 
 /*
@@ -70,6 +71,33 @@ public:
 		vector<vector<int>> ans(d, vector<int> {});
 		levelOrder(ans, root, d - 1);
 		return ans;
+	}
+};
+
+//4ms BFS
+class Solution3 {
+public:
+	vector<vector<int>> levelOrderBottom(TreeNode* root) {
+		vector<vector<int>> res;
+		if (!root) return res;
+		queue<TreeNode*> q;
+		q.push(root);
+		while (!q.empty())
+		{
+			vector<int> leves;
+			int count = q.size();
+			while (count--)
+			{
+				TreeNode* node = q.front();
+				q.pop();
+				leves.push_back(node->val);
+
+				if (node->left) q.push(node->left);
+				if (node->right) q.push(node->right);
+			}
+		}
+		reverse(res.begin(), res.end());
+		return res;
 	}
 };
 
