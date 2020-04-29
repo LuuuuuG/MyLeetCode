@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stack>
+#include "000_util.h"
 using namespace std;
 
 /*
@@ -27,12 +28,12 @@ Output:
 /*
 * Definition for a binary tree node.
 */
-struct TreeNode {
-	int val;
-	TreeNode *left;
-	TreeNode *right;
-	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-};
+//struct TreeNode {
+//	int val;
+//	TreeNode *left;
+//	TreeNode *right;
+//	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+//};
 
 //Recursion
 TreeNode* invertTree(TreeNode* root) {
@@ -58,4 +59,15 @@ TreeNode* invertTree2(TreeNode* root) {
 		}
 	}
 	return root;
+}
+
+int main()
+{
+	TreeNode *tree = TreeCreate(7, 3, 9, 20, INT_MAX, INT_MAX, 15, 7);
+	TreePrint(tree);
+	TreeNode * ivtTree = invertTree2(tree);
+	TreePrint(ivtTree);
+
+	system("pause");
+	return 0;
 }
