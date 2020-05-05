@@ -477,6 +477,9 @@
     <ClCompile Include="107_Binary Tree Level Order Traversal II.cpp">
       <Filter>Source Files\tree</Filter>
     </ClCompile>
+    <ClCompile Include="098_Validate Binary Search Tree.cpp">
+      <Filter>Source Files\tree</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="000_util.h">

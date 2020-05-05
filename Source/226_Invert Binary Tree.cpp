@@ -61,7 +61,7 @@ TreeNode* invertTree2(TreeNode* root) {
 	return root;
 }
 
-int main()
+int main_226()
 {
 	TreeNode *tree = TreeCreate(7, 3, 9, 20, INT_MAX, INT_MAX, 15, 7);
 	TreePrint(tree);

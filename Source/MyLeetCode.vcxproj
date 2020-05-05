@@ -118,6 +118,7 @@
     <ClCompile Include="088_ Merge_Sorted_Array.cpp" />
     <ClCompile Include="090_Subsets II.cpp" />
     <ClCompile Include="092_Reverse Linked List II.cpp" />
+    <ClCompile Include="098_Validate Binary Search Tree.cpp" />
     <ClCompile Include="100_Same Tree.cpp" />
     <ClCompile Include="101_Symmetric Tree.cpp" />
     <ClCompile Include="102_Binary Tree Level Order Traversal.cpp" />
