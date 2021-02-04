@@ -28,6 +28,12 @@
     <Filter Include="Source Files\Linked List">
       <UniqueIdentifier>{470a8388-0f96-4692-b7ff-ba3c5a6885a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\BackTrack">
+      <UniqueIdentifier>{9251d568-1286-4075-b853-6ab5b445f151}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Bit Oper">
+      <UniqueIdentifier>{74a2d43a-2213-470e-b91c-6bb1019177c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="000_util.cpp">
@@ -36,25 +42,7 @@
     <ClCompile Include="007_Reverse Integer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="008_String to Integer (atoi).cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="009_Palindrome_Number.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="023_Merge k Sorted Lists.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="024_Swap Nodes in Pairs.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="033_Search in Rotated Sorted Array.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="039_Combination Sum.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="040_Combination Sum II.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="041_First Missing Positive.cpp">
@@ -66,61 +54,10 @@
     <ClCompile Include="059_Spiral Matrix II.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="062_Unique Paths.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="063_Unique Paths II.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="064_Minimum Path Sum.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="069_Sqrt(x).cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="075_Sort Colors.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="077_Combinations.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="078_Subsets.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="080_Remove Duplicates from Sorted Array II.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="081_Search in Rotated Sorted Array II.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="082_Remove Duplicates from Sorted List II.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="090_Subsets II.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="092_Reverse Linked List II.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="136_Single Number.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="141_Linked List Cycle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="148_Sort List.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="151_Reverse Words in a String.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="153_Find Minimum in Rotated Sorted Array.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="155_Min Stack.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="160_Intersection of Two Linked Lists.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="171_Excel Sheet Column Number.cpp">
@@ -132,34 +69,13 @@
     <ClCompile Include="179_Largest Number.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="189_Rotate Array.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="190_Reverse Bits.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="191_Number of 1 Bits.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="215_Kth Largest Element in an Array.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="216_Combination Sum III.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="225_Implement Stack using Queues.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="231_Power of Two.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="232_Implement Queue using Stacks.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="242_Valid Anagram.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="257_Binary Tree Paths.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="258_Add Digits.cpp">
@@ -171,55 +87,19 @@
     <ClCompile Include="326_Power of Three.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="328_Odd Even Linked List.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="345_Reverse Vowels of a String.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="350_Intersection of Two Arrays II.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="371_Sum of Two Integers.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="377_Combination Sum IV.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="383_Ransom Note.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="412_Fizz Buzz.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="450_Delete Node in a BST.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="476_Number Complement.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="538_Convert BST to Greater Tree.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="543_Diameter of Binary Tree.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="572_Subtree of Another Tree.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="617_Merge Two Binary Trees.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="657_Robot Return to Origin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="700_Search in a Binary Search Tree.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="703_Kth Largest Element in a Stream.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="709_To Lower Case.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="788_Rotated Digits.cpp">
@@ -234,31 +114,13 @@
     <ClCompile Include="859_Buddy Strings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="872_Leaf-Similar Trees.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="884_Uncommon Words from Two Sentences.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="896_Monotonic Array.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="905_Sort Array By Parity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="917_Reverse Only Letters.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="922_Sort Array By Parity II.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="929_Unique Email Addresses.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="937_Reorder Log Files.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="415_Add Strings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="001_Two Sum.cpp">
@@ -414,9 +276,6 @@
     <ClCompile Include="876_Middle of the Linked List.cpp">
       <Filter>Source Files\Linked List</Filter>
     </ClCompile>
-    <ClCompile Include="054_Spiral Matrix.cpp">
-      <Filter>Source Files\tree</Filter>
-    </ClCompile>
     <ClCompile Include="100_Same Tree.cpp">
       <Filter>Source Files\tree</Filter>
     </ClCompile>
@@ -482,6 +341,153 @@
     </ClCompile>
     <ClCompile Include="530_Minimum Absolute Difference in BST.cpp">
       <Filter>Source Files\tree</Filter>
+    </ClCompile>
+    <ClCompile Include="008_String to Integer (atoi).cpp">
+      <Filter>Source Files\string</Filter>
+    </ClCompile>
+    <ClCompile Include="082_Remove Duplicates from Sorted List II.cpp">
+      <Filter>Source Files\Linked List</Filter>
+    </ClCompile>
+    <ClCompile Include="905_Sort Array By Parity.cpp">
+      <Filter>Source Files\Array</Filter>
+    </ClCompile>
+    <ClCompile Include="033_Search in Rotated Sorted Array.cpp">
+      <Filter>Source Files\Array</Filter>
+    </ClCompile>
+    <ClCompile Include="080_Remove Duplicates from Sorted Array II.cpp">
+      <Filter>Source Files\Array</Filter>
+    </ClCompile>
+    <ClCompile Include="081_Search in Rotated Sorted Array II.cpp">
+      <Filter>Source Files\Array</Filter>
+    </ClCompile>
+    <ClCompile Include="092_Reverse Linked List II.cpp">
+      <Filter>Source Files\Linked List</Filter>
+    </ClCompile>
+    <ClCompile Include="151_Reverse Words in a String.cpp">
+      <Filter>Source Files\string</Filter>
+    </ClCompile>
+    <ClCompile Include="160_Intersection of Two Linked Lists.cpp">
+      <Filter>Source Files\Linked List</Filter>
+    </ClCompile>
+    <ClCompile Include="700_Search in a Binary Search Tree.cpp">
+      <Filter>Source Files\tree</Filter>
+    </ClCompile>
+    <ClCompile Include="023_Merge k Sorted Lists.cpp">
+      <Filter>Source Files\Linked List</Filter>
+    </ClCompile>
+    <ClCompile Include="141_Linked List Cycle.cpp">
+      <Filter>Source Files\Linked List</Filter>
+    </ClCompile>
+    <ClCompile Include="148_Sort List.cpp">
+      <Filter>Source Files\Linked List</Filter>
+    </ClCompile>
+    <ClCompile Include="328_Odd Even Linked List.cpp">
+      <Filter>Source Files\Linked List</Filter>
+    </ClCompile>
+    <ClCompile Include="350_Intersection of Two Arrays II.cpp">
+      <Filter>Source Files\Array</Filter>
+    </ClCompile>
+    <ClCompile Include="153_Find Minimum in Rotated Sorted Array.cpp">
+      <Filter>Source Files\Array</Filter>
+    </ClCompile>
+    <ClCompile Include="062_Unique Paths.cpp">
+      <Filter>Source Files\DP</Filter>
+    </ClCompile>
+    <ClCompile Include="063_Unique Paths II.cpp">
+      <Filter>Source Files\DP</Filter>
+    </ClCompile>
+    <ClCompile Include="257_Binary Tree Paths.cpp">
+      <Filter>Source Files\tree</Filter>
+    </ClCompile>
+    <ClCompile Include="450_Delete Node in a BST.cpp">
+      <Filter>Source Files\tree</Filter>
+    </ClCompile>
+    <ClCompile Include="538_Convert BST to Greater Tree.cpp">
+      <Filter>Source Files\tree</Filter>
+    </ClCompile>
+    <ClCompile Include="543_Diameter of Binary Tree.cpp">
+      <Filter>Source Files\tree</Filter>
+    </ClCompile>
+    <ClCompile Include="617_Merge Two Binary Trees.cpp">
+      <Filter>Source Files\tree</Filter>
+    </ClCompile>
+    <ClCompile Include="572_Subtree of Another Tree.cpp">
+      <Filter>Source Files\tree</Filter>
+    </ClCompile>
+    <ClCompile Include="872_Leaf-Similar Trees.cpp">
+      <Filter>Source Files\tree</Filter>
+    </ClCompile>
+    <ClCompile Include="189_Rotate Array.cpp">
+      <Filter>Source Files\Array</Filter>
+    </ClCompile>
+    <ClCompile Include="064_Minimum Path Sum.cpp">
+      <Filter>Source Files\DP</Filter>
+    </ClCompile>
+    <ClCompile Include="039_Combination Sum.cpp">
+      <Filter>Source Files\BackTrack</Filter>
+    </ClCompile>
+    <ClCompile Include="040_Combination Sum II.cpp">
+      <Filter>Source Files\BackTrack</Filter>
+    </ClCompile>
+    <ClCompile Include="077_Combinations.cpp">
+      <Filter>Source Files\BackTrack</Filter>
+    </ClCompile>
+    <ClCompile Include="078_Subsets.cpp">
+      <Filter>Source Files\BackTrack</Filter>
+    </ClCompile>
+    <ClCompile Include="090_Subsets II.cpp">
+      <Filter>Source Files\BackTrack</Filter>
+    </ClCompile>
+    <ClCompile Include="216_Combination Sum III.cpp">
+      <Filter>Source Files\BackTrack</Filter>
+    </ClCompile>
+    <ClCompile Include="215_Kth Largest Element in an Array.cpp">
+      <Filter>Source Files\Array</Filter>
+    </ClCompile>
+    <ClCompile Include="377_Combination Sum IV.cpp">
+      <Filter>Source Files\BackTrack</Filter>
+    </ClCompile>
+    <ClCompile Include="922_Sort Array By Parity II.cpp">
+      <Filter>Source Files\Array</Filter>
+    </ClCompile>
+    <ClCompile Include="896_Monotonic Array.cpp">
+      <Filter>Source Files\Array</Filter>
+    </ClCompile>
+    <ClCompile Include="345_Reverse Vowels of a String.cpp">
+      <Filter>Source Files\string</Filter>
+    </ClCompile>
+    <ClCompile Include="024_Swap Nodes in Pairs.cpp">
+      <Filter>Source Files\Linked List</Filter>
+    </ClCompile>
+    <ClCompile Include="709_To Lower Case.cpp">
+      <Filter>Source Files\string</Filter>
+    </ClCompile>
+    <ClCompile Include="191_Number of 1 Bits.cpp">
+      <Filter>Source Files\Bit Oper</Filter>
+    </ClCompile>
+    <ClCompile Include="371_Sum of Two Integers.cpp">
+      <Filter>Source Files\Bit Oper</Filter>
+    </ClCompile>
+    <ClCompile Include="415_Add Strings.cpp">
+      <Filter>Source Files\string</Filter>
+    </ClCompile>
+    <ClCompile Include="136_Single Number.cpp">
+      <Filter>Source Files\Bit Oper</Filter>
+    </ClCompile>
+    <ClCompile Include="075_Sort Colors.cpp">
+      <Filter>Source Files\Array</Filter>
+    </ClCompile>
+    <ClCompile Include="231_Power of Two.cpp">
+      <Filter>Source Files\Bit Oper</Filter>
+    </ClCompile>
+    <ClCompile Include="917_Reverse Only Letters.cpp">
+      <Filter>Source Files\string</Filter>
+    </ClCompile>
+    <ClCompile Include="242_Valid Anagram.cpp">
+      <Filter>Source Files\Array</Filter>
+    </ClCompile>
+    <ClCompile Include="054_Spiral Matrix.cpp">
+      <Filter>Source Files\Array</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

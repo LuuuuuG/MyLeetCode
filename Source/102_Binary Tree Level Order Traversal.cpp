@@ -59,7 +59,7 @@ public:
 	vector<vector<int>> levelOrder(TreeNode* root) {
 		vector<vector<int>> res;
 
-		//if (root == NULL)   return{};
+		if (root == NULL)   return{};
 		queue<TreeNode*> q;
 		q.push(root);
 
@@ -82,13 +82,35 @@ public:
 	}
 };
 
+#include <stack>
+vector<int> inorderTraversal(TreeNode* root) {
+	vector<int> result;
+	stack<pair<TreeNode*, int> > stk;
+	stk.push((make_pair(root, 0)));
+
+	while (!stk.empty()) {
+		//auto[node, type] = stk.top();
+		TreeNode* node = stk.top().first;
+		int type = stk.top().second;
+		stk.pop();
+		if (node == nullptr) continue;
+		if (type == 0) {
+			stk.push(make_pair(node->right, 0));
+			stk.push(make_pair(node, 1));
+			stk.push(make_pair(node->left, 0));
+		}
+		else result.push_back(node->val);
+	}
+	return result;
+}
+
 int main_102()
 {
 	TreeNode *tree = TreeCreate(7, 3, 9, 20, INT_MAX, INT_MAX, 15, 7);
 	TreePrint(tree);
 
 	Solution1 s2;
-	vector<vector<int> > res = s2.levelOrder(NULL);
+	vector<vector<int> > res = s2.levelOrder(tree);
 	//Vector2DPrint(res);
 
 	cout << "[" << endl;;
