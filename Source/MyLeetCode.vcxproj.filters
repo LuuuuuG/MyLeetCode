@@ -495,6 +495,9 @@
     <ClCompile Include="94_二叉树的中序遍历.cpp">
       <Filter>Source Files\tree</Filter>
     </ClCompile>
+    <ClCompile Include="96_不同的二叉搜索树.cpp">
+      <Filter>Source Files\tree</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="000_util.h">

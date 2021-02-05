@@ -226,6 +226,7 @@
     <ClCompile Include="929_Unique Email Addresses.cpp" />
     <ClCompile Include="937_Reorder Log Files.cpp" />
     <ClCompile Include="94_二叉树的中序遍历.cpp" />
+    <ClCompile Include="96_不同的二叉搜索树.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="000_util.h" />
