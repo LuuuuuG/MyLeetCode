@@ -489,6 +489,12 @@
     <ClCompile Include="054_Spiral Matrix.cpp">
       <Filter>Source Files\Array</Filter>
     </ClCompile>
+    <ClCompile Include="897_递增顺序查找树.cpp">
+      <Filter>Source Files\tree</Filter>
+    </ClCompile>
+    <ClCompile Include="94_二叉树的中序遍历.cpp">
+      <Filter>Source Files\tree</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="000_util.h">

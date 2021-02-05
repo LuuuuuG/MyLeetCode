@@ -219,11 +219,13 @@
     <ClCompile Include="884_Uncommon Words from Two Sentences.cpp" />
     <ClCompile Include="896_Monotonic Array.cpp" />
     <ClCompile Include="897_Increasing Order Search Tree.cpp" />
+    <ClCompile Include="897_递增顺序查找树.cpp" />
     <ClCompile Include="905_Sort Array By Parity.cpp" />
     <ClCompile Include="917_Reverse Only Letters.cpp" />
     <ClCompile Include="922_Sort Array By Parity II.cpp" />
     <ClCompile Include="929_Unique Email Addresses.cpp" />
     <ClCompile Include="937_Reorder Log Files.cpp" />
+    <ClCompile Include="94_二叉树的中序遍历.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="000_util.h" />
